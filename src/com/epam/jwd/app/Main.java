@@ -1,6 +1,9 @@
 package com.epam.jwd.app;
 
-import com.epam.jwd.model.*;
+import com.epam.jwd.model.Line;
+import com.epam.jwd.model.Point;
+import com.epam.jwd.model.Square;
+import com.epam.jwd.model.Triangle;
 import com.epam.jwd.service.LineService;
 import com.epam.jwd.service.PointService;
 import com.epam.jwd.service.SquareService;

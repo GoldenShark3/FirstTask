@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 
 public class PointService {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(PointService.class);
 
     public double calcLengthBetweenTwoPoints(Point firstPoint, Point secondPoint) {
         int deltaX = secondPoint.getX() - firstPoint.getX();

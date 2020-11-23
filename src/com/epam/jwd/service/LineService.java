@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class LineService {
-    private final Logger LOGGER = LogManager.getLogger();
+    private final Logger LOGGER = LogManager.getLogger(LineService.class);
 
     public boolean isCorrectFigure(Line line) {
         return !line.getFirstPoint().equals(line.getSecondPoint());

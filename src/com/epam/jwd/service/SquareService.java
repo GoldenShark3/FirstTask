@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class SquareService {
     private final PointService POINT_SERVICE = new PointService();
-    private final Logger LOGGER = LogManager.getLogger();
+    private final Logger LOGGER = LogManager.getLogger(SquareService.class);
 
     public boolean isCorrectFigure (Square square) {
         return !(square.getFirstPoint().equals(square.getSecondPoint()) ||

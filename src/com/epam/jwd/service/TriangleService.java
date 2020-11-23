@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class TriangleService {
     private final PointService POINT_SERVICE = new PointService();
-    private final Logger LOGGER = LogManager.getLogger();
+    private final Logger LOGGER = LogManager.getLogger(TriangleService.class);
 
     public boolean isCorrectFigure(Triangle triangle) {
         return !(triangle.getFirstPoint().equals(triangle.getSecondPoint()) ||
