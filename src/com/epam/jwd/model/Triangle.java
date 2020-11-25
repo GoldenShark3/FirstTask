@@ -1,6 +1,6 @@
 package com.epam.jwd.model;
 
-public class Triangle {
+public class Triangle{
     private Point firstPoint;
     private Point secondPoint;
     private Point thirdPoint;

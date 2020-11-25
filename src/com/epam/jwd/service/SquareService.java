@@ -11,13 +11,13 @@ public class SquareService {
     private final PointService POINT_SERVICE = new PointService();
     private final Logger LOGGER = LogManager.getLogger(SquareService.class);
 
-    public boolean isCorrectFigure (Square square) {
-        return !(square.getFirstPoint().equals(square.getSecondPoint()) ||
-                 square.getFirstPoint().equals(square.getThirdPoint()) ||
-                 square.getFirstPoint().equals(square.getFourthPoint()) ||
-                 square.getSecondPoint().equals(square.getThirdPoint()) ||
-                 square.getSecondPoint().equals(square.getFourthPoint()) ||
-                 square.getThirdPoint().equals(square.getFourthPoint()));
+    public boolean isNotCorrectFigure (Square square) {
+        return square.getFirstPoint().equals(square.getSecondPoint())
+                || square.getFirstPoint().equals(square.getThirdPoint())
+                || square.getFirstPoint().equals(square.getFourthPoint())
+                || square.getSecondPoint().equals(square.getThirdPoint())
+                || square.getSecondPoint().equals(square.getFourthPoint())
+                || square.getThirdPoint().equals(square.getFourthPoint());
     }
 
     private double[] calcSquareSidesLength(Square square) {
@@ -41,14 +41,14 @@ public class SquareService {
         double[] arrOfSidesLength = calcSquareSidesLength(square);
         Arrays.sort(arrOfSidesLength);
 
-        return arrOfSidesLength[0] == arrOfSidesLength[3] &&
-               arrOfSidesLength[4] == arrOfSidesLength[5];
+        return arrOfSidesLength[0] == arrOfSidesLength[3]
+                && arrOfSidesLength[4] == arrOfSidesLength[5];
     }
 
     public void displayInfoAboutArrOfSquares(Square[] squares) {
         System.out.println("Logs about array of Squares");
         for (Square square : squares) {
-            if (isCorrectFigure(square)) {
+            if (isNotCorrectFigure(square)) {
                 LOGGER.error("{} - is not square", square);
             } else {
                 if (isSquareExist(square)) {

@@ -41,8 +41,8 @@ public class Main {
                                            new Point(0, 3));
 
         ARR_OF_TRIANGLES[1] = new Triangle(new Point(0, 0),
-                                           new Point(0, 0),
-                                           new Point(0, 0));
+                                           new Point(-1, 1),
+                                           new Point(1, -1));
     }
 
     private static void initArrOfSquares() {

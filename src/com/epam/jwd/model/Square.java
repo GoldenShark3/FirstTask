@@ -1,6 +1,6 @@
 package com.epam.jwd.model;
 
-public class Square {
+public class Square{
     private Point firstPoint;
     private Point secondPoint;
     private Point thirdPoint;

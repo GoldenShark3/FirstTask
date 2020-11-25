@@ -9,10 +9,10 @@ public class TriangleService {
     private final PointService POINT_SERVICE = new PointService();
     private final Logger LOGGER = LogManager.getLogger(TriangleService.class);
 
-    public boolean isCorrectFigure(Triangle triangle) {
-        return !(triangle.getFirstPoint().equals(triangle.getSecondPoint()) ||
-               triangle.getFirstPoint().equals(triangle.getThirdPoint()) ||
-               triangle.getSecondPoint().equals(triangle.getThirdPoint())) ;
+    public boolean isNotCorrectFigure(Triangle triangle) {
+        return triangle.getFirstPoint().equals(triangle.getSecondPoint())
+                || triangle.getFirstPoint().equals(triangle.getThirdPoint())
+                || triangle.getSecondPoint().equals(triangle.getThirdPoint()) ;
     }
 
     private double[] calcTriangleSidesLength(Triangle triangle) {
@@ -31,15 +31,15 @@ public class TriangleService {
     public boolean isTriangleExist(Triangle triangle) {
         double[] arrOfSidesLength = calcTriangleSidesLength(triangle);
 
-        return arrOfSidesLength[0] < (arrOfSidesLength[1] + arrOfSidesLength[2]) &&
-                arrOfSidesLength[1] < (arrOfSidesLength[0] + arrOfSidesLength[2]) &&
-                arrOfSidesLength[2] < (arrOfSidesLength[0] + arrOfSidesLength[1]);
+        return arrOfSidesLength[0] < (arrOfSidesLength[1] + arrOfSidesLength[2])
+                && arrOfSidesLength[1] < (arrOfSidesLength[0] + arrOfSidesLength[2])
+                && arrOfSidesLength[2] < (arrOfSidesLength[0] + arrOfSidesLength[1]);
     }
 
     public void displayInfoAboutArrOfTriangles(Triangle[] triangles) {
         System.out.println("Logs about array of Triangles");
         for (Triangle triangle : triangles) {
-            if (isCorrectFigure(triangle)) {
+            if (isNotCorrectFigure(triangle)) {
                 LOGGER.error("{} - is not triangle", triangle);
             } else {
                 if (isTriangleExist(triangle)) {
