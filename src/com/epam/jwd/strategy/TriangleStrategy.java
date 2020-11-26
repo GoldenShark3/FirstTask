@@ -1,8 +1,15 @@
 package com.epam.jwd.strategy;
-
 import com.epam.jwd.model.polygonal.Triangle;
 
 public class TriangleStrategy implements MultiAngleFigureStrategy<Triangle> {
+    private static final TriangleStrategy INSTANCE = new TriangleStrategy();
+
+    private TriangleStrategy() {
+    }
+
+    public static TriangleStrategy getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public double calcArea(Triangle figure) {

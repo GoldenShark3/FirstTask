@@ -46,12 +46,12 @@ public class Main {
         ARR_OF_TRIANGLES[0] = new Triangle(new Point(0, -2),
                                            new Point(3, 3),
                                            new Point(0, 3),
-                                           new TriangleStrategy());
+                                           TriangleStrategy.getInstance());
 
         ARR_OF_TRIANGLES[1] = new Triangle(new Point(0, 0),
                                            new Point(-1, 1),
                                            new Point(1, -1),
-                                           new TriangleStrategy());
+                                           TriangleStrategy.getInstance());
     }
 
     private static void initArrOfSquares() {
@@ -59,7 +59,7 @@ public class Main {
                                        ARR_OF_POINTS[1],
                                        ARR_OF_POINTS[2],
                                        ARR_OF_POINTS[3],
-                                       new SquareStrategy());
+                                       SquareStrategy.getInstance());
     }
 
     private static void initArrOfMultiAngleFigures() {
@@ -69,7 +69,7 @@ public class Main {
                                                                          new Point(-8 ,0),
                                                                          new Point(-5, -4),
                                                                          new Point(-0, -4)},
-                                                                         new MultiAngleStrategy());
+                                                                     MultiAngleStrategy.INSTANCE);
     }
 
     public static void main(String[] args) {

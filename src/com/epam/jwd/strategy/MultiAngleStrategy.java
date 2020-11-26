@@ -2,7 +2,9 @@ package com.epam.jwd.strategy;
 
 import com.epam.jwd.model.polygonal.MultiAngleFigure;
 
-public class MultiAngleStrategy implements MultiAngleFigureStrategy<MultiAngleFigure> {
+public enum MultiAngleStrategy implements MultiAngleFigureStrategy<MultiAngleFigure>{
+    INSTANCE;
+
     @Override
     public double calcArea(MultiAngleFigure figure) {
         double[] figureSidesLength = calcSidesLength(figure);
@@ -14,12 +16,8 @@ public class MultiAngleStrategy implements MultiAngleFigureStrategy<MultiAngleFi
     @Override
     public double calcPerimeter(MultiAngleFigure figure) {
         double[] figuresSidesLength = calcSidesLength(figure);
-        double perimeter = 0;
 
-        for (double sideLength: figuresSidesLength) {
-            perimeter += sideLength;
-        }
-        return perimeter;
+        return figuresSidesLength[0] * figuresSidesLength.length;
     }
 
     private double[] calcSidesLength(MultiAngleFigure figure) {
