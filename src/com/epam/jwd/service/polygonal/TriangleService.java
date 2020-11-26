@@ -22,14 +22,14 @@ public class TriangleService extends MultiAngleFiguresService<Triangle> {
     @Override
     public void displayInfoAboutArrOfFigures(Triangle[] figures) {
         System.out.println("Logs about array of Triangles");
-//        System.out.println("Area: " + figures[0].getPolygonalFigureStrategy().calcArea(figures[0]));
-//        System.out.println("Perimeter " + figures[0].getPolygonalFigureStrategy().calcPerimeter(figures[0]));
         for (Triangle triangle : figures) {
             if (isNotCorrectFigure(triangle)) {
                 LOGGER.error("{} - is not triangle", triangle);
             } else {
                 if (isFigureExist(triangle)) {
-                    LOGGER.info("{}", triangle);
+                    LOGGER.info("{}\nPerimeter = {}\nArea = {}", triangle,
+                                                          String.format("%.2f" ,calcPerimeter(triangle)),
+                                                          String.format("%.2f", calcArea(triangle)));
                 } else {
                     LOGGER.error("{} - can't exist", triangle);
                 }

@@ -3,13 +3,13 @@ package com.epam.jwd.model.polygonal;
 import com.epam.jwd.strategy.MultiAngleFigureStrategy;
 
 public abstract class Figure {
-    private MultiAngleFigureStrategy<? extends Figure> multiAngleFigureStrategy;
+    private MultiAngleFigureStrategy<?> multiAngleFigureStrategy;
 
-    public Figure(MultiAngleFigureStrategy<? extends Figure> multiAngleFigureStrategy) {
+    public Figure(MultiAngleFigureStrategy<?> multiAngleFigureStrategy) {
         this.multiAngleFigureStrategy = multiAngleFigureStrategy;
     }
 
-    public MultiAngleFigureStrategy<? extends Figure> getPolygonalFigureStrategy() {
+    public MultiAngleFigureStrategy<?> getPolygonalFigureStrategy() {
         return multiAngleFigureStrategy;
     }
 

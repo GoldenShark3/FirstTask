@@ -5,7 +5,6 @@ import com.epam.jwd.model.polygonal.Square;
 import com.epam.jwd.service.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Arrays;
 
 public class SquareService extends MultiAngleFiguresService<Square> {
@@ -52,14 +51,14 @@ public class SquareService extends MultiAngleFiguresService<Square> {
     @Override
     public void displayInfoAboutArrOfFigures(Square[] figures) {
         System.out.println("Logs about array of Squares");
-//        System.out.println("Area: " + figures[0].getPolygonalFigureStrategy().calcArea(figures[0]));
-//        System.out.println("Perimeter " + figures[0].getPolygonalFigureStrategy().calcPerimeter(figures[0]));
         for (Square square : figures) {
             if (isNotCorrectFigure(square)) {
                 LOGGER.error("{} - is not square", square);
             } else {
                 if (isFigureExist(square)) {
-                    LOGGER.info("{}", square);
+                    LOGGER.info("{}\nPerimeter = {}\nArea = {}", square,
+                                                         calcPerimeter(square),
+                                                         calcArea(square));
                 } else {
                     LOGGER.error("{} - can't exist", square);
                 }

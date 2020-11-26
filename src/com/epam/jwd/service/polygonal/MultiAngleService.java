@@ -37,13 +37,14 @@ public class MultiAngleService extends MultiAngleFiguresService<MultiAngleFigure
     @Override
     public void displayInfoAboutArrOfFigures(MultiAngleFigure[] figures) {
         System.out.println("Logs about array of MultiAngleFigure: ");
-//        System.out.println("Area: " + figures[0].getPolygonalFigureStrategy().calcArea(figures[0]));
         for (MultiAngleFigure figure : figures) {
             if (isNotCorrectFigure(figure)) {
                 LOGGER.error("{} - is not figure", figure);
             } else {
                 if (isFigureExist(figure)) {
-                    LOGGER.info("{}", figure);
+                    LOGGER.info("{}\nPerimeter = {}\nArea = {}",figure,
+                                       String.format("%.2f", calcPerimeter(figure)),
+                                       String.format("%.2f", calcArea(figure)));
                 } else {
                     LOGGER.error("{} - is not correct figure", figure);
                 }

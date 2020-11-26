@@ -3,8 +3,7 @@ package com.epam.jwd.strategy;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.model.polygonal.Figure;
 
-public interface MultiAngleFigureStrategy<T extends Figure> {
-
+public interface MultiAngleFigureStrategy<T> {
     double calcArea(T figure);
     double calcPerimeter(T figure);
 
