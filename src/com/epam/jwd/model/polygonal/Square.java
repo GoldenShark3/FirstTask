@@ -1,16 +1,26 @@
-package com.epam.jwd.model;
+package com.epam.jwd.model.polygonal;
 
-public class Square{
+import com.epam.jwd.model.Point;
+import com.epam.jwd.strategy.MultiAngleFigureStrategy;
+import com.epam.jwd.strategy.SquareStrategy;
+
+public class Square extends Figure{
     private Point firstPoint;
     private Point secondPoint;
     private Point thirdPoint;
     private Point fourthPoint;
 
-    public Square(Point firstPoint, Point secondPoint, Point thirdPoint, Point fourthPoint) {
+    public Square(Point firstPoint, Point secondPoint, Point thirdPoint, Point fourthPoint, SquareStrategy squareStrategy) {
+        super(squareStrategy);
         this.firstPoint = firstPoint;
         this.secondPoint = secondPoint;
         this.thirdPoint = thirdPoint;
         this.fourthPoint = fourthPoint;
+    }
+
+    @Override
+    public MultiAngleFigureStrategy<Square> getPolygonalFigureStrategy() {
+        return (MultiAngleFigureStrategy<Square>) super.getPolygonalFigureStrategy();
     }
 
     @Override
