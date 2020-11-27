@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class MultiAngleFigure extends Figure {
     private Point[] points;
 
-    public MultiAngleFigure(Point[] points, MultiAngleStrategy multiAngleStrategy) {
+    MultiAngleFigure(Point[] points, MultiAngleStrategy multiAngleStrategy) {
         super(multiAngleStrategy);
         this.points = points;
     }

@@ -1,7 +1,4 @@
-package com.epam.jwd.model.factory;
-
-import com.epam.jwd.model.Line;
-import com.epam.jwd.model.Point;
+package com.epam.jwd.model;
 
 import java.util.LinkedList;
 

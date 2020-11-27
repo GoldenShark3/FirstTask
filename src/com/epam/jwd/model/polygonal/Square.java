@@ -4,15 +4,13 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.strategy.MultiAngleFigureStrategy;
 import com.epam.jwd.strategy.SquareStrategy;
 
-import java.util.Objects;
-
 public class Square extends Figure{
     private Point firstPoint;
     private Point secondPoint;
     private Point thirdPoint;
     private Point fourthPoint;
 
-    public Square(Point firstPoint, Point secondPoint, Point thirdPoint, Point fourthPoint, SquareStrategy squareStrategy) {
+    Square(Point firstPoint, Point secondPoint, Point thirdPoint, Point fourthPoint, SquareStrategy squareStrategy) {
         super(squareStrategy);
         this.firstPoint = firstPoint;
         this.secondPoint = secondPoint;

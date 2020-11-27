@@ -1,11 +1,11 @@
 package com.epam.jwd.app;
 
 import com.epam.jwd.model.Line;
-import com.epam.jwd.model.factory.LineFactory;
+import com.epam.jwd.model.LineFactory;
 import com.epam.jwd.model.Point;
-import com.epam.jwd.model.factory.PointFactory;
+import com.epam.jwd.model.PointFactory;
 import com.epam.jwd.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.model.factory.MultiAngleFigureFactory;
+import com.epam.jwd.model.polygonal.MultiAngleFigureFactory;
 import com.epam.jwd.model.polygonal.Square;
 import com.epam.jwd.model.polygonal.Triangle;
 import com.epam.jwd.service.LineService;

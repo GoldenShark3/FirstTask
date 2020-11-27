@@ -9,7 +9,7 @@ public class Triangle extends Figure {
     private Point secondPoint;
     private Point thirdPoint;
 
-    public Triangle(Point firstPoint, Point secondPoint, Point thirdPoint, TriangleStrategy triangleStrategy) {
+    Triangle(Point firstPoint, Point secondPoint, Point thirdPoint, TriangleStrategy triangleStrategy) {
         super(triangleStrategy);
         this.firstPoint = firstPoint;
         this.secondPoint = secondPoint;

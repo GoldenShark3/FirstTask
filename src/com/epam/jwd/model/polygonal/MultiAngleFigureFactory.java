@@ -1,4 +1,4 @@
-package com.epam.jwd.model.factory;
+package com.epam.jwd.model.polygonal;
 
 import com.epam.jwd.model.Point;
 import com.epam.jwd.model.polygonal.Figure;

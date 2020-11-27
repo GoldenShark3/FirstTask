@@ -4,7 +4,7 @@ public class Line {
     private Point firstPoint;
     private Point secondPoint;
 
-    public Line(Point firstPoint, Point secondPoint) {
+    Line(Point firstPoint, Point secondPoint) {
         this.firstPoint = firstPoint;
         this.secondPoint = secondPoint;
     }
