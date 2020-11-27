@@ -1,12 +1,8 @@
 package com.epam.jwd.model.polygonal;
 
-import com.epam.jwd.model.Point;
-import com.epam.jwd.model.polygonal.Figure;
-import com.epam.jwd.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.model.polygonal.Square;
-import com.epam.jwd.model.polygonal.Triangle;
+import com.epam.jwd.model.simple.Point;
+import com.epam.jwd.model.Figure;
 import com.epam.jwd.strategy.MultiAngleStrategy;
-import com.epam.jwd.strategy.SquareStrategy;
 import com.epam.jwd.strategy.TriangleStrategy;
 
 import java.util.Arrays;
@@ -52,7 +48,7 @@ public class MultiAngleFigureFactory {
                 }
             }
         }
-        Square square = new Square(firstPoint, secondPoint, thirdPoint, fourthPoint, SquareStrategy.getInstance());
+        Square square = new Square(firstPoint, secondPoint, thirdPoint, fourthPoint, MultiAngleStrategy.INSTANCE);
         ALL_CREATED_POLYGONAL_FIGURE.add(square);
         return square;
     }

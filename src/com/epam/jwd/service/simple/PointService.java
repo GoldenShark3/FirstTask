@@ -1,5 +1,5 @@
-package com.epam.jwd.service;
-import com.epam.jwd.model.Point;
+package com.epam.jwd.service.simple;
+import com.epam.jwd.model.simple.Point;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

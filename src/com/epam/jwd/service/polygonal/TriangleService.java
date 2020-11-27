@@ -1,8 +1,8 @@
 package com.epam.jwd.service.polygonal;
 
-import com.epam.jwd.model.Point;
+import com.epam.jwd.model.simple.Point;
 import com.epam.jwd.model.polygonal.Triangle;
-import com.epam.jwd.service.PointService;
+import com.epam.jwd.service.simple.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +21,7 @@ public class TriangleService extends MultiAngleFiguresService<Triangle> {
 
     @Override
     public void displayInfoAboutArrOfFigures(Triangle[] figures) {
-        System.out.println("Logs about array of Triangles");
+        System.out.println("\nLogs about array of Triangles");
         for (Triangle triangle : figures) {
             if (isNotCorrectFigure(triangle)) {
                 LOGGER.error("{} - is not triangle", triangle);

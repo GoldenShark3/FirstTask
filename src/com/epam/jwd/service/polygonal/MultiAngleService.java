@@ -1,7 +1,7 @@
 package com.epam.jwd.service.polygonal;
 
 import com.epam.jwd.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.service.PointService;
+import com.epam.jwd.service.simple.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,7 +36,7 @@ public class MultiAngleService extends MultiAngleFiguresService<MultiAngleFigure
 
     @Override
     public void displayInfoAboutArrOfFigures(MultiAngleFigure[] figures) {
-        System.out.println("Logs about array of MultiAngleFigure: ");
+        System.out.println("\nLogs about array of MultiAngleFigure: ");
         for (MultiAngleFigure figure : figures) {
             if (isNotCorrectFigure(figure)) {
                 LOGGER.error("{} - is not figure", figure);
@@ -64,7 +64,7 @@ public class MultiAngleService extends MultiAngleFiguresService<MultiAngleFigure
 
     @Override
     public double[] calcFigureSidesLength(MultiAngleFigure figure) {
-        double[] sidesLength = new double[figure.getPoints().length];
+        double[] sidesLength = new double[figure.getPoints().length ];
 
         for (int i = 0; i < figure.getPoints().length - 1; i++) {
             sidesLength[i] = POINT_SERVICE.calcLengthBetweenTwoPoints(figure.getPoints()[i], figure.getPoints()[i + 1]);

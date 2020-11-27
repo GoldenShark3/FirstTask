@@ -1,6 +1,7 @@
 package com.epam.jwd.model.polygonal;
 
-import com.epam.jwd.model.Point;
+import com.epam.jwd.model.Figure;
+import com.epam.jwd.model.simple.Point;
 import com.epam.jwd.strategy.MultiAngleFigureStrategy;
 import com.epam.jwd.strategy.TriangleStrategy;
 

@@ -1,6 +1,8 @@
-package com.epam.jwd.model;
+package com.epam.jwd.model.simple;
 
-public class Line {
+import com.epam.jwd.model.SimpleFigure;
+
+public class Line extends SimpleFigure {
     private Point firstPoint;
     private Point secondPoint;
 

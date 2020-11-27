@@ -1,4 +1,4 @@
-package com.epam.jwd.model.polygonal;
+package com.epam.jwd.model;
 
 import com.epam.jwd.strategy.MultiAngleFigureStrategy;
 

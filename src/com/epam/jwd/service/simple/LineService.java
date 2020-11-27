@@ -1,5 +1,5 @@
-package com.epam.jwd.service;
-import com.epam.jwd.model.Line;
+package com.epam.jwd.service.simple;
+import com.epam.jwd.model.simple.Line;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +11,7 @@ public class LineService {
     }
 
     public void displayInfoAboutArrOfLine(Line[] lines) {
-        System.out.println("Logs about array of lines: ");
+        System.out.println("\nLogs about array of lines: ");
         for (Line line : lines) {
             if (isNotCorrectFigure(line)) {
                 LOGGER.error("{} - is not line", line);

@@ -1,7 +1,6 @@
 package com.epam.jwd.strategy;
 
-import com.epam.jwd.model.Point;
-import com.epam.jwd.model.polygonal.Figure;
+import com.epam.jwd.model.simple.Point;
 
 public interface MultiAngleFigureStrategy<T> {
     double calcArea(T figure);

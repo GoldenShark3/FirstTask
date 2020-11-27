@@ -1,8 +1,8 @@
 package com.epam.jwd.service.polygonal;
 
-import com.epam.jwd.model.Point;
+import com.epam.jwd.model.simple.Point;
 import com.epam.jwd.model.polygonal.Square;
-import com.epam.jwd.service.PointService;
+import com.epam.jwd.service.simple.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
@@ -50,15 +50,15 @@ public class SquareService extends MultiAngleFiguresService<Square> {
 
     @Override
     public void displayInfoAboutArrOfFigures(Square[] figures) {
-        System.out.println("Logs about array of Squares");
+        System.out.println("\nLogs about array of Squares");
         for (Square square : figures) {
             if (isNotCorrectFigure(square)) {
                 LOGGER.error("{} - is not square", square);
             } else {
                 if (isFigureExist(square)) {
                     LOGGER.info("{}\nPerimeter = {}\nArea = {}", square,
-                                                         calcPerimeter(square),
-                                                         calcArea(square));
+                                                         String.format("%.2f", calcPerimeter(square)),
+                                                         String.format("%.2f", calcArea(square)));
                 } else {
                     LOGGER.error("{} - can't exist", square);
                 }

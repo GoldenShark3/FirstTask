@@ -1,6 +1,7 @@
 package com.epam.jwd.model.polygonal;
 
-import com.epam.jwd.model.Point;
+import com.epam.jwd.model.Figure;
+import com.epam.jwd.model.simple.Point;
 import com.epam.jwd.strategy.MultiAngleFigureStrategy;
 import com.epam.jwd.strategy.MultiAngleStrategy;
 
@@ -17,10 +18,6 @@ public class MultiAngleFigure extends Figure {
     @Override
     public MultiAngleFigureStrategy<MultiAngleFigure> getPolygonalFigureStrategy() {
         return (MultiAngleFigureStrategy<MultiAngleFigure>) super.getPolygonalFigureStrategy();
-    }
-
-    public Point[] getPoints() {
-        return points;
     }
 
     @Override
@@ -41,5 +38,9 @@ public class MultiAngleFigure extends Figure {
         return "MultiAngleFigure{" +
                 "points=" + Arrays.toString(points) +
                 '}';
+    }
+
+    public Point[] getPoints() {
+        return points;
     }
 }

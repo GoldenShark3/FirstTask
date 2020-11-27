@@ -1,6 +1,8 @@
-package com.epam.jwd.model;
+package com.epam.jwd.model.simple;
 
-public class Point {
+import com.epam.jwd.model.SimpleFigure;
+
+public class Point extends SimpleFigure {
     private int x;
     private int y;
 
