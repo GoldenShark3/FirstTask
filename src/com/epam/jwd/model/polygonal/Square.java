@@ -4,6 +4,8 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.strategy.MultiAngleFigureStrategy;
 import com.epam.jwd.strategy.SquareStrategy;
 
+import java.util.Objects;
+
 public class Square extends Figure{
     private Point firstPoint;
     private Point secondPoint;
