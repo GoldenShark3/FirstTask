@@ -1,23 +1,22 @@
-package com.epam.jwd.model.polygonal;
+package com.epam.jwd.shapes.model.polygonal;
 
-import com.epam.jwd.model.Figure;
-import com.epam.jwd.model.simple.Point;
-import com.epam.jwd.strategy.MultiAngleFigureStrategy;
-import com.epam.jwd.strategy.MultiAngleStrategy;
+import com.epam.jwd.shapes.model.Figure;
+import com.epam.jwd.shapes.model.simple.Point;
+import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
 
 import java.util.Arrays;
 
 public class MultiAngleFigure extends Figure {
-    private Point[] points;
+    private final Point[] points;
 
-    MultiAngleFigure(Point[] points, MultiAngleStrategy multiAngleStrategy) {
+    MultiAngleFigure(Point[] points, MultiAngleFigureStrategy multiAngleStrategy) {
         super(multiAngleStrategy);
         this.points = points;
     }
 
     @Override
-    public MultiAngleFigureStrategy<MultiAngleFigure> getPolygonalFigureStrategy() {
-        return (MultiAngleFigureStrategy<MultiAngleFigure>) super.getPolygonalFigureStrategy();
+    public MultiAngleFigureStrategy getPolygonalFigureStrategy() {
+        return super.getPolygonalFigureStrategy();
     }
 
     @Override

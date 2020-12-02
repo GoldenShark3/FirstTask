@@ -1,10 +1,15 @@
-package com.epam.jwd.service.simple;
-import com.epam.jwd.model.simple.Line;
+package com.epam.jwd.shapes.service.simple;
+import com.epam.jwd.shapes.model.simple.Line;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LineService {
+public final class LineService {
     private final Logger LOGGER = LogManager.getLogger(LineService.class);
+    public final static LineService INSTANCE = new LineService();
+
+    private LineService() {
+
+    }
 
     public boolean isNotCorrectFigure(Line line) {
         return line.getFirstPoint().equals(line.getSecondPoint());

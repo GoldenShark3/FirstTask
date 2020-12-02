@@ -1,27 +1,27 @@
-package com.epam.jwd.app;
+package com.epam.jwd.shapes;
 
-import com.epam.jwd.model.simple.Line;
-import com.epam.jwd.model.simple.Point;
-import com.epam.jwd.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.model.polygonal.MultiAngleFigureFactory;
-import com.epam.jwd.model.polygonal.Square;
-import com.epam.jwd.model.polygonal.Triangle;
-import com.epam.jwd.model.simple.SimpleFigureFactory;
-import com.epam.jwd.service.simple.LineService;
-import com.epam.jwd.service.simple.PointService;
-import com.epam.jwd.service.polygonal.MultiAngleService;
-import com.epam.jwd.service.polygonal.SquareService;
-import com.epam.jwd.service.polygonal.TriangleService;
+import com.epam.jwd.shapes.model.simple.Line;
+import com.epam.jwd.shapes.model.simple.Point;
+import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.polygonal.MultiAngleFigureFactory;
+import com.epam.jwd.shapes.model.polygonal.Square;
+import com.epam.jwd.shapes.model.polygonal.Triangle;
+import com.epam.jwd.shapes.model.simple.SimpleFigureFactory;
+import com.epam.jwd.shapes.service.simple.LineService;
+import com.epam.jwd.shapes.service.simple.PointService;
+import com.epam.jwd.shapes.service.polygonal.MultiAngleService;
+import com.epam.jwd.shapes.service.polygonal.SquareService;
+import com.epam.jwd.shapes.service.polygonal.TriangleService;
 
 public class Main {
-    private final static PointService POINT_SERVICE = new PointService();
-    private final static LineService LINE_SERVICE = new LineService();
-    private final static TriangleService TRIANGLE_SERVICE = new TriangleService();
-    private final static SquareService SQUARE_SERVICE = new SquareService();
-    private final static MultiAngleService MULTI_ANGLE_SERVICE = new MultiAngleService();
+    private final static PointService POINT_SERVICE = PointService.getInstance();
+    private final static LineService LINE_SERVICE = LineService.INSTANCE;
+    private final static TriangleService TRIANGLE_SERVICE = TriangleService.INSTANCE;
+    private final static SquareService SQUARE_SERVICE = SquareService.INSTANCE;
+    private final static MultiAngleService MULTI_ANGLE_SERVICE = MultiAngleService.INSTANCE;
 
-    private final static SimpleFigureFactory SIMPLE_FIGURE_FACTORY = new SimpleFigureFactory();
-    private final static MultiAngleFigureFactory MULTI_ANGLE_FIGURE_FACTORY = new MultiAngleFigureFactory();
+    private final static SimpleFigureFactory SIMPLE_FIGURE_FACTORY = SimpleFigureFactory.getInstance();
+    private final static MultiAngleFigureFactory MULTI_ANGLE_FIGURE_FACTORY = MultiAngleFigureFactory.getInstance();
 
     private final static Point[] ARR_OF_POINTS = new Point[4];
     private final static Line[] ARR_OF_LINES = new Line[2];

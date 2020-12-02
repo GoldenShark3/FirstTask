@@ -1,8 +1,9 @@
-package com.epam.jwd.strategy;
+package com.epam.jwd.shapes.strategy;
 
-import com.epam.jwd.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.service.simple.PointService;
 
-public enum MultiAngleStrategy implements MultiAngleFigureStrategy<MultiAngleFigure>{
+public enum MultiAngleStrategy implements MultiAngleFigureStrategy{
     INSTANCE;
 
     @Override
@@ -21,12 +22,14 @@ public enum MultiAngleStrategy implements MultiAngleFigureStrategy<MultiAngleFig
     }
 
     private double[] calcSidesLength(MultiAngleFigure figure) {
+        final PointService POINT_SERVICE = PointService.getInstance();
+
         double[] figureSidesLength = new double[figure.getPoints().length];
 
         for (int i = 0; i < figure.getPoints().length - 1; i++) {
-            figureSidesLength[i] = distanceBetweenTwoPoints(figure.getPoints()[i], figure.getPoints()[i + 1]);
+            figureSidesLength[i] = POINT_SERVICE.calcLengthBetweenTwoPoints(figure.getPoints()[i], figure.getPoints()[i + 1]);
         }
-        figureSidesLength[figure.getPoints().length - 1] = distanceBetweenTwoPoints(figure.getPoints()[0],
+        figureSidesLength[figure.getPoints().length - 1] = POINT_SERVICE.calcLengthBetweenTwoPoints(figure.getPoints()[0],
                 figure.getPoints()[figure.getPoints().length - 1]);
 
         return figureSidesLength;

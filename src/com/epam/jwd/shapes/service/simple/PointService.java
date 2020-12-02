@@ -1,11 +1,24 @@
-package com.epam.jwd.service.simple;
-import com.epam.jwd.model.simple.Point;
+package com.epam.jwd.shapes.service.simple;
+import com.epam.jwd.shapes.model.simple.Point;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class PointService {
+public final class PointService {
     private static final Logger LOGGER = LogManager.getLogger(PointService.class);
+    private static PointService instance;
+
+    private PointService() {
+
+    }
+
+    public static PointService getInstance() {
+        if (instance == null) {
+            return instance = new PointService();
+        }
+        return instance;
+    }
+
 
     public double calcLengthBetweenTwoPoints(Point firstPoint, Point secondPoint) {
         int deltaX = secondPoint.getX() - firstPoint.getX();

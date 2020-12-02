@@ -1,13 +1,18 @@
-package com.epam.jwd.service.polygonal;
+package com.epam.jwd.shapes.service.polygonal;
 
-import com.epam.jwd.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.service.simple.PointService;
+import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.service.simple.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MultiAngleService extends MultiAngleFiguresService<MultiAngleFigure> {
+public final class MultiAngleService implements MultiAngleFiguresService {
     private final static Logger LOGGER = LogManager.getLogger(MultiAngleService.class);
-    private final static PointService POINT_SERVICE = new PointService();
+    private final static PointService POINT_SERVICE = PointService.getInstance();
+    public final static MultiAngleService INSTANCE = new MultiAngleService();
+
+    private MultiAngleService() {
+
+    }
 
     @Override
     public boolean isNotCorrectFigure(MultiAngleFigure figure) {

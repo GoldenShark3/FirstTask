@@ -1,32 +1,41 @@
-package com.epam.jwd.service.polygonal;
+package com.epam.jwd.shapes.service.polygonal;
 
-import com.epam.jwd.model.simple.Point;
-import com.epam.jwd.model.polygonal.Square;
-import com.epam.jwd.service.simple.PointService;
+import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.simple.Point;
+import com.epam.jwd.shapes.model.polygonal.Square;
+import com.epam.jwd.shapes.service.simple.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 
-public class SquareService extends MultiAngleFiguresService<Square> {
-    private final PointService POINT_SERVICE = new PointService();
+public final class SquareService implements MultiAngleFiguresService {
+    private final PointService POINT_SERVICE = PointService.getInstance();
     private final Logger LOGGER = LogManager.getLogger(SquareService.class);
+    public final static SquareService INSTANCE = new SquareService();
+
+    private SquareService() {
+
+    }
+
 
     @Override
-    public boolean isNotCorrectFigure(Square figure) {
-        return figure.getFirstPoint().equals(figure.getSecondPoint())
-                || figure.getFirstPoint().equals(figure.getThirdPoint())
-                || figure.getFirstPoint().equals(figure.getFourthPoint())
-                || figure.getSecondPoint().equals(figure.getThirdPoint())
-                || figure.getSecondPoint().equals(figure.getFourthPoint())
-                || figure.getThirdPoint().equals(figure.getFourthPoint());
+    public boolean isNotCorrectFigure(MultiAngleFigure figure) {
+        Square square = (Square) figure;
+        return square.getFirstPoint().equals(square.getSecondPoint())
+                || square.getFirstPoint().equals(square.getThirdPoint())
+                || square.getFirstPoint().equals(square.getFourthPoint())
+                || square.getSecondPoint().equals(square.getThirdPoint())
+                || square.getSecondPoint().equals(square.getFourthPoint())
+                || square.getThirdPoint().equals(square.getFourthPoint());
     }
 
     @Override
-    public double[] calcFigureSidesLength(Square figure) {
-        Point firstPoint = figure.getFirstPoint();
-        Point secondPoint = figure.getSecondPoint();
-        Point thirdPoint = figure.getThirdPoint();
-        Point fourthPoint = figure.getFourthPoint();
+    public double[] calcFigureSidesLength(MultiAngleFigure figure) {
+        Square square = (Square) figure;
+        Point firstPoint = square.getFirstPoint();
+        Point secondPoint = square.getSecondPoint();
+        Point thirdPoint = square.getThirdPoint();
+        Point fourthPoint = square.getFourthPoint();
         double[] arrOfSidesLength = new double[6];
 
         arrOfSidesLength[0] = POINT_SERVICE.calcLengthBetweenTwoPoints(firstPoint, secondPoint);
@@ -40,7 +49,7 @@ public class SquareService extends MultiAngleFiguresService<Square> {
     }
 
     @Override
-    public boolean isFigureExist(Square figure) {
+    public boolean isFigureExist(MultiAngleFigure figure) {
         double[] arrOfSidesLength = calcFigureSidesLength(figure);
         Arrays.sort(arrOfSidesLength);
 
@@ -49,9 +58,9 @@ public class SquareService extends MultiAngleFiguresService<Square> {
     }
 
     @Override
-    public void displayInfoAboutArrOfFigures(Square[] figures) {
+    public void displayInfoAboutArrOfFigures(MultiAngleFigure[] figures) {
         System.out.println("\nLogs about array of Squares");
-        for (Square square : figures) {
+        for (MultiAngleFigure square : figures) {
             if (isNotCorrectFigure(square)) {
                 LOGGER.error("{} - is not square", square);
             } else {
@@ -67,12 +76,13 @@ public class SquareService extends MultiAngleFiguresService<Square> {
     }
 
     @Override
-    public double calcArea(Square figure) {
+    public double calcArea(MultiAngleFigure figure) {
+
         return figure.getPolygonalFigureStrategy().calcArea(figure);
     }
 
     @Override
-    public double calcPerimeter(Square figure) {
+    public double calcPerimeter(MultiAngleFigure figure) {
         return figure.getPolygonalFigureStrategy().calcPerimeter(figure);
     }
 

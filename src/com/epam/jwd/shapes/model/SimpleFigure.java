@@ -1,4 +1,4 @@
-package com.epam.jwd.model;
+package com.epam.jwd.shapes.model;
 
 public abstract class SimpleFigure {
 

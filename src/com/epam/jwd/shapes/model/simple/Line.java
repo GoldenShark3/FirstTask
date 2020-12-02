@@ -1,10 +1,10 @@
-package com.epam.jwd.model.simple;
+package com.epam.jwd.shapes.model.simple;
 
-import com.epam.jwd.model.SimpleFigure;
+import com.epam.jwd.shapes.model.SimpleFigure;
 
 public class Line extends SimpleFigure {
-    private Point firstPoint;
-    private Point secondPoint;
+    private final Point firstPoint;
+    private final Point secondPoint;
 
     Line(Point firstPoint, Point secondPoint) {
         this.firstPoint = firstPoint;
@@ -25,6 +25,5 @@ public class Line extends SimpleFigure {
     public Point getSecondPoint() {
         return secondPoint;
     }
-
 
 }
