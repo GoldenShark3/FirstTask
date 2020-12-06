@@ -10,6 +10,17 @@ import com.epam.jwd.shapes.model.simple.Point;
 class ApplicationContext {
     private final static FigureExistencePreProcessor FIGURE_PRE_PROCESSING = FigureExistencePreProcessor.INSTANCE;
     private final static FigureExistencePostProcessor FIGURE_POST_PROCESSING = FigureExistencePostProcessor.INSTANCE;
+    private static ApplicationContext instance;
+
+    private ApplicationContext() {
+    }
+
+    public static ApplicationContext getInstance() {
+        if (instance == null) {
+            return new ApplicationContext();
+        }
+        return instance;
+    }
 
     void preProcessing(Point... points) throws FigureException {
         FIGURE_PRE_PROCESSING.process(points);

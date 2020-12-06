@@ -6,7 +6,7 @@ import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.simple.Point;
 
 public class Factory extends FigureFactoryDecorator {
-    private final static ApplicationContext APPLICATION_CONTEXT = new ApplicationContext();
+    private final static ApplicationContext APPLICATION_CONTEXT = ApplicationContext.getInstance();
 
     public Factory(FigureFactory figureFactory) {
         super(figureFactory);
