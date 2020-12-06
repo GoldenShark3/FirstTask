@@ -1,8 +1,9 @@
-package com.epam.jwd.shapes.strategy;
+package com.epam.jwd.shapes.strategy.impl;
 
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.polygonal.Triangle;
-import com.epam.jwd.shapes.service.simple.PointService;
+import com.epam.jwd.shapes.service.simple.impl.PointService;
+import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
 
 public class TriangleStrategy implements MultiAngleFigureStrategy {
     private static final TriangleStrategy INSTANCE = new TriangleStrategy();
@@ -16,7 +17,7 @@ public class TriangleStrategy implements MultiAngleFigureStrategy {
     }
 
     @Override
-    public double calcArea(MultiAngleFigure figure) {
+    public double calcArea(Figure figure) {
         Triangle triangle = (Triangle) figure;
         double firstSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getSecondPoint());
         double secondSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getThirdPoint());
@@ -29,7 +30,7 @@ public class TriangleStrategy implements MultiAngleFigureStrategy {
     }
 
     @Override
-    public double calcPerimeter(MultiAngleFigure figure) {
+    public double calcPerimeter(Figure figure) {
         Triangle triangle = (Triangle) figure;
         double firstSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getSecondPoint());
         double secondSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getThirdPoint());

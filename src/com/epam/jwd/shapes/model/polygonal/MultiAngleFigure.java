@@ -3,14 +3,15 @@ package com.epam.jwd.shapes.model.polygonal;
 import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
+import com.epam.jwd.shapes.strategy.impl.MultiAngleStrategy;
 
 import java.util.Arrays;
 
 public class MultiAngleFigure extends Figure {
     private final Point[] points;
 
-    MultiAngleFigure(Point[] points, MultiAngleFigureStrategy multiAngleStrategy) {
-        super(multiAngleStrategy);
+    MultiAngleFigure(Point[] points) {
+        super(MultiAngleStrategy.INSTANCE);
         this.points = points;
     }
 

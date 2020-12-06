@@ -1,9 +1,10 @@
-package com.epam.jwd.shapes.service.polygonal;
+package com.epam.jwd.shapes.service.polygonal.impl;
 
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.model.polygonal.Square;
-import com.epam.jwd.shapes.service.simple.PointService;
+import com.epam.jwd.shapes.service.polygonal.MultiAngleFiguresService;
+import com.epam.jwd.shapes.service.simple.impl.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
@@ -17,9 +18,8 @@ public final class SquareService implements MultiAngleFiguresService {
 
     }
 
-
     @Override
-    public boolean isNotCorrectFigure(MultiAngleFigure figure) {
+    public boolean isNotCorrectFigure(Figure figure) {
         Square square = (Square) figure;
         return square.getFirstPoint().equals(square.getSecondPoint())
                 || square.getFirstPoint().equals(square.getThirdPoint())
@@ -30,7 +30,7 @@ public final class SquareService implements MultiAngleFiguresService {
     }
 
     @Override
-    public double[] calcFigureSidesLength(MultiAngleFigure figure) {
+    public double[] calcFigureSidesLength(Figure figure) {
         Square square = (Square) figure;
         Point firstPoint = square.getFirstPoint();
         Point secondPoint = square.getSecondPoint();
@@ -49,7 +49,7 @@ public final class SquareService implements MultiAngleFiguresService {
     }
 
     @Override
-    public boolean isFigureExist(MultiAngleFigure figure) {
+    public boolean isFigureExist(Figure figure) {
         double[] arrOfSidesLength = calcFigureSidesLength(figure);
         Arrays.sort(arrOfSidesLength);
 
@@ -58,31 +58,28 @@ public final class SquareService implements MultiAngleFiguresService {
     }
 
     @Override
-    public void displayInfoAboutArrOfFigures(MultiAngleFigure[] figures) {
+    public void displayInfoAboutArrOfFigures(Figure[] figures) {
         System.out.println("\nLogs about array of Squares");
-        for (MultiAngleFigure square : figures) {
-            if (isNotCorrectFigure(square)) {
+        for (Figure square : figures) {
+            if (square != null && isNotCorrectFigure(square)) {
                 LOGGER.error("{} - is not square", square);
             } else {
-                if (isFigureExist(square)) {
+                if (square != null && isFigureExist(square)) {
                     LOGGER.info("{}\nPerimeter = {}\nArea = {}", square,
                                                          String.format("%.2f", calcPerimeter(square)),
                                                          String.format("%.2f", calcArea(square)));
-                } else {
-                    LOGGER.error("{} - can't exist", square);
                 }
             }
         }
     }
 
     @Override
-    public double calcArea(MultiAngleFigure figure) {
-
+    public double calcArea(Figure figure) {
         return figure.getPolygonalFigureStrategy().calcArea(figure);
     }
 
     @Override
-    public double calcPerimeter(MultiAngleFigure figure) {
+    public double calcPerimeter(Figure figure) {
         return figure.getPolygonalFigureStrategy().calcPerimeter(figure);
     }
 

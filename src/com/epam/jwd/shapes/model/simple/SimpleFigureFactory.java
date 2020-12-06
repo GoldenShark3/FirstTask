@@ -62,11 +62,9 @@ public final class SimpleFigureFactory {
         if (index == allCreatedSimpleFigure.length - 1) {
             increaseCacheSize();
         }
-
         Line line = new Line(firstPoint, secondPoint);
         allCreatedSimpleFigure[index] = line;
         index++;
-
         return line;
     }
 

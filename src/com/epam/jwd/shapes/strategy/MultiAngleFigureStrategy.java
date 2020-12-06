@@ -1,8 +1,8 @@
 package com.epam.jwd.shapes.strategy;
 
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.Figure;
 
 public interface MultiAngleFigureStrategy{
-    double calcArea(MultiAngleFigure figure);
-    double calcPerimeter(MultiAngleFigure figure);
+    double calcArea(Figure figure);
+    double calcPerimeter(Figure figure);
 }

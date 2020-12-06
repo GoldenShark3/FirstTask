@@ -1,16 +1,19 @@
 package com.epam.jwd.shapes.model.polygonal;
 
+import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
-import com.epam.jwd.shapes.strategy.TriangleStrategy;
+import com.epam.jwd.shapes.strategy.impl.TriangleStrategy;
 
-public class Triangle extends MultiAngleFigure {
+import java.util.Objects;
+
+public class Triangle extends Figure {
     private final Point firstPoint;
     private final Point secondPoint;
     private final Point thirdPoint;
 
     Triangle(Point firstPoint, Point secondPoint, Point thirdPoint) {
-        super(new Point[]{firstPoint, secondPoint, thirdPoint}, TriangleStrategy.getInstance());
+        super(TriangleStrategy.getInstance());
         this.firstPoint = firstPoint;
         this.secondPoint = secondPoint;
         this.thirdPoint = thirdPoint;
@@ -30,6 +33,22 @@ public class Triangle extends MultiAngleFigure {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Triangle triangle = (Triangle) o;
+        return Objects.equals(firstPoint, triangle.firstPoint) &&
+                Objects.equals(secondPoint, triangle.secondPoint) &&
+                Objects.equals(thirdPoint, triangle.thirdPoint);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), firstPoint, secondPoint, thirdPoint);
+    }
+
     public Point getFirstPoint() {
         return firstPoint;
     }
@@ -40,5 +59,9 @@ public class Triangle extends MultiAngleFigure {
 
     public Point getThirdPoint() {
         return thirdPoint;
+    }
+
+    public Point[] fetchArrOfPoints() {
+        return new Point[]{firstPoint, secondPoint, thirdPoint};
     }
 }

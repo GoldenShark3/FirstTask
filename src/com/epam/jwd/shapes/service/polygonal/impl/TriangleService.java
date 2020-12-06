@@ -1,9 +1,11 @@
-package com.epam.jwd.shapes.service.polygonal;
+package com.epam.jwd.shapes.service.polygonal.impl;
 
+import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.model.polygonal.Triangle;
-import com.epam.jwd.shapes.service.simple.PointService;
+import com.epam.jwd.shapes.service.polygonal.MultiAngleFiguresService;
+import com.epam.jwd.shapes.service.simple.impl.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +19,7 @@ public final class TriangleService implements MultiAngleFiguresService {
     }
 
     @Override
-    public boolean isFigureExist(MultiAngleFigure figure) {
+    public boolean isFigureExist(Figure figure) {
         double[] arrOfSidesLength = calcFigureSidesLength(figure);
 
         return arrOfSidesLength[0] < (arrOfSidesLength[1] + arrOfSidesLength[2])
@@ -26,35 +28,34 @@ public final class TriangleService implements MultiAngleFiguresService {
     }
 
     @Override
-    public void displayInfoAboutArrOfFigures(MultiAngleFigure[] figures) {
+    public void displayInfoAboutArrOfFigures(Figure[] figures) {
         System.out.println("\nLogs about array of Triangles");
-        for (MultiAngleFigure triangle : figures) {
-            if (isNotCorrectFigure(triangle)) {
+        for (Figure triangle : figures) {
+            if (triangle != null && isNotCorrectFigure(triangle)) {
                 LOGGER.error("{} - is not triangle", triangle);
             } else {
-                if (isFigureExist(triangle)) {
+                if (triangle != null && isFigureExist(triangle)) {
                     LOGGER.info("{}\nPerimeter = {}\nArea = {}", triangle,
-                                                          String.format("%.2f" ,calcPerimeter(triangle)),
-                                                          String.format("%.2f", calcArea(triangle)));
-                } else {
-                    LOGGER.error("{} - can't exist", triangle);
+                            String.format("%.2f", calcPerimeter(triangle)),
+                            String.format("%.2f", calcArea(triangle)));
+
                 }
             }
         }
     }
 
     @Override
-    public double calcArea(MultiAngleFigure figure) {
+    public double calcArea(Figure figure) {
         return figure.getPolygonalFigureStrategy().calcArea(figure);
     }
 
     @Override
-    public double calcPerimeter(MultiAngleFigure figure) {
+    public double calcPerimeter(Figure figure) {
         return figure.getPolygonalFigureStrategy().calcPerimeter(figure);
     }
 
     @Override
-    public double[] calcFigureSidesLength(MultiAngleFigure figure) {
+    public double[] calcFigureSidesLength(Figure figure) {
         Triangle triangle = (Triangle) figure;
         Point firstPoint = triangle.getFirstPoint();
         Point secondPoint = triangle.getSecondPoint();
@@ -69,7 +70,7 @@ public final class TriangleService implements MultiAngleFiguresService {
     }
 
     @Override
-    public boolean isNotCorrectFigure(MultiAngleFigure figure) {
+    public boolean isNotCorrectFigure(Figure figure) {
         Triangle triangle = (Triangle) figure;
         return triangle.getFirstPoint().equals(triangle.getSecondPoint())
                 || triangle.getFirstPoint().equals(triangle.getThirdPoint())

@@ -1,7 +1,6 @@
 package com.epam.jwd.shapes.model.simple;
 
 import com.epam.jwd.shapes.model.SimpleFigure;
-
 import java.util.Objects;
 
 public class Point extends SimpleFigure {
@@ -38,6 +37,5 @@ public class Point extends SimpleFigure {
     public int getY() {
         return y;
     }
-
 
 }

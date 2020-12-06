@@ -1,19 +1,27 @@
 package com.epam.jwd.shapes;
 
+import com.epam.jwd.shapes.decorator.Factory;
+import com.epam.jwd.shapes.exception.FigureException;
+import com.epam.jwd.shapes.exception.FigureNotExistException;
+import com.epam.jwd.shapes.model.Figure;
+import com.epam.jwd.shapes.model.polygonal.PolygonalFigureFactory;
 import com.epam.jwd.shapes.model.simple.Line;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigureFactory;
 import com.epam.jwd.shapes.model.polygonal.Square;
 import com.epam.jwd.shapes.model.polygonal.Triangle;
 import com.epam.jwd.shapes.model.simple.SimpleFigureFactory;
-import com.epam.jwd.shapes.service.simple.LineService;
-import com.epam.jwd.shapes.service.simple.PointService;
-import com.epam.jwd.shapes.service.polygonal.MultiAngleService;
-import com.epam.jwd.shapes.service.polygonal.SquareService;
-import com.epam.jwd.shapes.service.polygonal.TriangleService;
+import com.epam.jwd.shapes.service.simple.impl.LineService;
+import com.epam.jwd.shapes.service.simple.impl.PointService;
+import com.epam.jwd.shapes.service.polygonal.impl.MultiAngleService;
+import com.epam.jwd.shapes.service.polygonal.impl.SquareService;
+import com.epam.jwd.shapes.service.polygonal.impl.TriangleService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
+    private final static Logger LOGGER = LogManager.getLogger(Main.class);
+
     private final static PointService POINT_SERVICE = PointService.getInstance();
     private final static LineService LINE_SERVICE = LineService.INSTANCE;
     private final static TriangleService TRIANGLE_SERVICE = TriangleService.INSTANCE;
@@ -21,13 +29,13 @@ public class Main {
     private final static MultiAngleService MULTI_ANGLE_SERVICE = MultiAngleService.INSTANCE;
 
     private final static SimpleFigureFactory SIMPLE_FIGURE_FACTORY = SimpleFigureFactory.getInstance();
-    private final static MultiAngleFigureFactory MULTI_ANGLE_FIGURE_FACTORY = MultiAngleFigureFactory.getInstance();
+    private final static Factory MULTI_ANGLE_FIGURE_FACTORY = new Factory(PolygonalFigureFactory.getInstance());
 
     private final static Point[] ARR_OF_POINTS = new Point[4];
     private final static Line[] ARR_OF_LINES = new Line[2];
-    private final static Triangle[] ARR_OF_TRIANGLES = new Triangle[2];
-    private final static Square[] ARR_OF_SQUARES = new Square[1];
-    private final static MultiAngleFigure[] ARR_OF_MULTI_ANGLE_FIGURE = new MultiAngleFigure[1];
+    private final static Figure[] ARR_OF_TRIANGLES = new Triangle[2];
+    private final static Figure[] ARR_OF_SQUARES = new Square[2];
+    private final static Figure[] ARR_OF_MULTI_ANGLE_FIGURE = new MultiAngleFigure[2];
 
     private static void initArrOfPoints() {
         ARR_OF_POINTS[0] = SIMPLE_FIGURE_FACTORY.createPoint(-5, 0);
@@ -46,46 +54,66 @@ public class Main {
                 SIMPLE_FIGURE_FACTORY.createPoint(0, 5));
     }
 
-    private static void initArrOfTriangles() {
-        ARR_OF_TRIANGLES[0] = MULTI_ANGLE_FIGURE_FACTORY.createTriangle(
+    private static void initArrOfTriangles() throws FigureException {
+        ARR_OF_TRIANGLES[0] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("triangle",
                 SIMPLE_FIGURE_FACTORY.createPoint(0, -2),
                 SIMPLE_FIGURE_FACTORY.createPoint(3, 3),
                 SIMPLE_FIGURE_FACTORY.createPoint(0, 3));
 
-        ARR_OF_TRIANGLES[1] = MULTI_ANGLE_FIGURE_FACTORY.createTriangle(
+        ARR_OF_TRIANGLES[1] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("triangle",
                 SIMPLE_FIGURE_FACTORY.createPoint(0, 0),
                 SIMPLE_FIGURE_FACTORY.createPoint(-1, 1),
                 SIMPLE_FIGURE_FACTORY.createPoint(1, -1));
     }
 
-    private static void initArrOfSquares() {
-        ARR_OF_SQUARES[0] = MULTI_ANGLE_FIGURE_FACTORY.createSquare(
-                ARR_OF_POINTS[0],
-                ARR_OF_POINTS[1],
-                ARR_OF_POINTS[2],
-                ARR_OF_POINTS[3]);
+    private static void initArrOfSquares() throws FigureException {
+        ARR_OF_SQUARES[0] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("square", ARR_OF_POINTS);
+        ARR_OF_SQUARES[1] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("square",
+                SIMPLE_FIGURE_FACTORY.createPoint(0, 0),
+                SIMPLE_FIGURE_FACTORY.createPoint(4, 5),
+                SIMPLE_FIGURE_FACTORY.createPoint(1, 1),
+                SIMPLE_FIGURE_FACTORY.createPoint(3,4));
     }
 
-    private static void initArrOfMultiAngleFigures() {
-        ARR_OF_MULTI_ANGLE_FIGURE[0] = MULTI_ANGLE_FIGURE_FACTORY.createMultiAngleFigure(
-                new Point[]{
-                        SIMPLE_FIGURE_FACTORY.createPoint(3, 0),
-                        SIMPLE_FIGURE_FACTORY.createPoint(0, 4),
-                        SIMPLE_FIGURE_FACTORY.createPoint(-5, 4),
-                        SIMPLE_FIGURE_FACTORY.createPoint(-8, 0),
-                        SIMPLE_FIGURE_FACTORY.createPoint(-5, -4),
-                        SIMPLE_FIGURE_FACTORY.createPoint(-0, -4)});
+    private static void initArrOfMultiAngleFigures() throws FigureException {
+        ARR_OF_MULTI_ANGLE_FIGURE[0] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("multiAngle",
+                SIMPLE_FIGURE_FACTORY.createPoint(3, 0),
+                SIMPLE_FIGURE_FACTORY.createPoint(0, 4),
+                SIMPLE_FIGURE_FACTORY.createPoint(-5, 4),
+                SIMPLE_FIGURE_FACTORY.createPoint(-8, 0),
+                SIMPLE_FIGURE_FACTORY.createPoint(-5, -4),
+                SIMPLE_FIGURE_FACTORY.createPoint(0, -4));
+
+        ARR_OF_MULTI_ANGLE_FIGURE[1] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("multiAngle",
+                SIMPLE_FIGURE_FACTORY.createPoint(0, 0),
+                SIMPLE_FIGURE_FACTORY.createPoint(0, 0),
+                SIMPLE_FIGURE_FACTORY.createPoint(-5, 4),
+                SIMPLE_FIGURE_FACTORY.createPoint(-3, 0),
+                SIMPLE_FIGURE_FACTORY.createPoint(10, -4),
+                SIMPLE_FIGURE_FACTORY.createPoint(0, -4));
     }
 
     public static void main(String[] args) {
         initArrOfPoints();
         initArrOfLines();
-        initArrOfTriangles();
-        initArrOfSquares();
-        initArrOfMultiAngleFigures();
+        try {
+            initArrOfTriangles();
+        } catch (FigureException exception) {
+            LOGGER.error(exception.getMessage());
+        }
+        try {
+            initArrOfSquares();
+        } catch (FigureException exception) {
+            LOGGER.error(exception.getMessage());
+        }
+        try {
+            initArrOfMultiAngleFigures();
+        } catch (FigureException exception) {
+            LOGGER.error(exception.getMessage());
+        }
 
-        POINT_SERVICE.displayInfoAboutArrOfPoints(ARR_OF_POINTS);
-        LINE_SERVICE.displayInfoAboutArrOfLine(ARR_OF_LINES);
+        POINT_SERVICE.displayInfoAboutArrOfFigures(ARR_OF_POINTS);
+        LINE_SERVICE.displayInfoAboutArrOfFigures(ARR_OF_LINES);
         TRIANGLE_SERVICE.displayInfoAboutArrOfFigures(ARR_OF_TRIANGLES);
         SQUARE_SERVICE.displayInfoAboutArrOfFigures(ARR_OF_SQUARES);
         MULTI_ANGLE_SERVICE.displayInfoAboutArrOfFigures(ARR_OF_MULTI_ANGLE_FIGURE);
