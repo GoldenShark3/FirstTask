@@ -41,12 +41,11 @@ public class Square extends Figure {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Square square = (Square) o;
-        return Objects.equals(firstPoint, square.firstPoint) &&
-                Objects.equals(secondPoint, square.secondPoint) &&
-                Objects.equals(thirdPoint, square.thirdPoint) &&
-                Objects.equals(fourthPoint, square.fourthPoint);
+        return firstPoint.equals(square.firstPoint)
+               && secondPoint.equals(square.secondPoint)
+               && thirdPoint.equals(square.thirdPoint)
+               && fourthPoint.equals(square.fourthPoint);
     }
 
     @Override

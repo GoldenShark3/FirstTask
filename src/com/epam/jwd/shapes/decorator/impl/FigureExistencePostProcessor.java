@@ -4,7 +4,7 @@ import com.epam.jwd.shapes.exception.FigureNotExistException;
 import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.polygonal.Square;
 import com.epam.jwd.shapes.model.polygonal.Triangle;
-import com.epam.jwd.shapes.service.FigurePostProcessor;
+import com.epam.jwd.shapes.decorator.api.FigurePostProcessor;
 import com.epam.jwd.shapes.service.polygonal.impl.MultiAngleService;
 import com.epam.jwd.shapes.service.polygonal.impl.SquareService;
 import com.epam.jwd.shapes.service.polygonal.impl.TriangleService;

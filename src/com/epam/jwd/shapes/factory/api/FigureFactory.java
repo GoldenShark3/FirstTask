@@ -1,4 +1,4 @@
-package com.epam.jwd.shapes.factory;
+package com.epam.jwd.shapes.factory.api;
 
 import com.epam.jwd.shapes.exception.FigureException;
 import com.epam.jwd.shapes.model.Figure;

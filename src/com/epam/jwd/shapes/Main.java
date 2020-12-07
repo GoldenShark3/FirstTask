@@ -1,10 +1,9 @@
 package com.epam.jwd.shapes;
 
-import com.epam.jwd.shapes.decorator.Factory;
+import com.epam.jwd.shapes.factory.impl.SimpleApplicationContext;
 import com.epam.jwd.shapes.exception.FigureException;
-import com.epam.jwd.shapes.exception.FigureNotExistException;
+import com.epam.jwd.shapes.factory.api.FigureFactory;
 import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.polygonal.PolygonalFigureFactory;
 import com.epam.jwd.shapes.model.simple.Line;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
@@ -29,7 +28,7 @@ public class Main {
     private final static MultiAngleService MULTI_ANGLE_SERVICE = MultiAngleService.INSTANCE;
 
     private final static SimpleFigureFactory SIMPLE_FIGURE_FACTORY = SimpleFigureFactory.getInstance();
-    private final static Factory MULTI_ANGLE_FIGURE_FACTORY = new Factory(PolygonalFigureFactory.getInstance());
+    private final static FigureFactory MULTI_ANGLE_FIGURE_FACTORY = SimpleApplicationContext.INSTANCE.createFigureFactory();
 
     private final static Point[] ARR_OF_POINTS = new Point[4];
     private final static Line[] ARR_OF_LINES = new Line[2];
@@ -62,8 +61,8 @@ public class Main {
 
         ARR_OF_TRIANGLES[1] = MULTI_ANGLE_FIGURE_FACTORY.createFigure("triangle",
                 SIMPLE_FIGURE_FACTORY.createPoint(0, 0),
-                SIMPLE_FIGURE_FACTORY.createPoint(-1, 1),
-                SIMPLE_FIGURE_FACTORY.createPoint(1, -1));
+                SIMPLE_FIGURE_FACTORY.createPoint(0, -3),
+                SIMPLE_FIGURE_FACTORY.createPoint(0, -3));
     }
 
     private static void initArrOfSquares() throws FigureException {
@@ -99,17 +98,17 @@ public class Main {
         try {
             initArrOfTriangles();
         } catch (FigureException exception) {
-            LOGGER.error(exception.getMessage());
+            LOGGER.error(exception.fillInStackTrace());
         }
         try {
             initArrOfSquares();
         } catch (FigureException exception) {
-            LOGGER.error(exception.getMessage());
+            LOGGER.error(exception.fillInStackTrace());
         }
         try {
             initArrOfMultiAngleFigures();
         } catch (FigureException exception) {
-            LOGGER.error(exception.getMessage());
+            LOGGER.error(exception.fillInStackTrace());
         }
 
         POINT_SERVICE.displayInfoAboutArrOfFigures(ARR_OF_POINTS);

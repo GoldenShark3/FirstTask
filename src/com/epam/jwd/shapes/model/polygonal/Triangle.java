@@ -37,11 +37,10 @@ public class Triangle extends Figure {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Triangle triangle = (Triangle) o;
-        return Objects.equals(firstPoint, triangle.firstPoint) &&
-                Objects.equals(secondPoint, triangle.secondPoint) &&
-                Objects.equals(thirdPoint, triangle.thirdPoint);
+        return firstPoint.equals(triangle.firstPoint)
+               && secondPoint.equals(triangle.secondPoint)
+               && thirdPoint.equals(triangle.thirdPoint);
     }
 
     @Override

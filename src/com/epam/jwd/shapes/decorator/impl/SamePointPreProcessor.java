@@ -2,14 +2,13 @@ package com.epam.jwd.shapes.decorator.impl;
 
 import com.epam.jwd.shapes.exception.FigureNotExistException;
 import com.epam.jwd.shapes.model.simple.Point;
-import com.epam.jwd.shapes.service.FigurePreProcessor;
-
+import com.epam.jwd.shapes.decorator.api.FigurePreProcessor;
 import java.util.Arrays;
 
-public class FigureExistencePreProcessor implements FigurePreProcessor {
-    public static final FigureExistencePreProcessor INSTANCE = new FigureExistencePreProcessor();
+public class SamePointPreProcessor implements FigurePreProcessor {
+    public static final SamePointPreProcessor INSTANCE = new SamePointPreProcessor();
 
-    private FigureExistencePreProcessor() {
+    private SamePointPreProcessor() {
 
     }
 
