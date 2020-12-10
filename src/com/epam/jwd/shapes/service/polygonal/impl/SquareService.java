@@ -1,6 +1,5 @@
 package com.epam.jwd.shapes.service.polygonal.impl;
 
-import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.model.polygonal.Square;
 import com.epam.jwd.shapes.service.polygonal.MultiAngleFiguresService;
@@ -8,8 +7,9 @@ import com.epam.jwd.shapes.service.simple.impl.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
+import java.util.List;
 
-public final class SquareService implements MultiAngleFiguresService {
+public final class SquareService implements MultiAngleFiguresService<Square> {
     private final PointService POINT_SERVICE = PointService.getInstance();
     private final Logger LOGGER = LogManager.getLogger(SquareService.class);
     public final static SquareService INSTANCE = new SquareService();
@@ -19,23 +19,21 @@ public final class SquareService implements MultiAngleFiguresService {
     }
 
     @Override
-    public boolean isNotCorrectFigure(Figure figure) {
-        Square square = (Square) figure;
-        return square.getFirstPoint().equals(square.getSecondPoint())
-                || square.getFirstPoint().equals(square.getThirdPoint())
-                || square.getFirstPoint().equals(square.getFourthPoint())
-                || square.getSecondPoint().equals(square.getThirdPoint())
-                || square.getSecondPoint().equals(square.getFourthPoint())
-                || square.getThirdPoint().equals(square.getFourthPoint());
+    public boolean isNotCorrectFigure(Square figure) {
+        return figure.getFirstPoint().equals(figure.getSecondPoint())
+                || figure.getFirstPoint().equals(figure.getThirdPoint())
+                || figure.getFirstPoint().equals(figure.getFourthPoint())
+                || figure.getSecondPoint().equals(figure.getThirdPoint())
+                || figure.getSecondPoint().equals(figure.getFourthPoint())
+                || figure.getThirdPoint().equals(figure.getFourthPoint());
     }
 
     @Override
-    public double[] calcFigureSidesLength(Figure figure) {
-        Square square = (Square) figure;
-        Point firstPoint = square.getFirstPoint();
-        Point secondPoint = square.getSecondPoint();
-        Point thirdPoint = square.getThirdPoint();
-        Point fourthPoint = square.getFourthPoint();
+    public double[] calcFigureSidesLength(Square figure) {
+        Point firstPoint = figure.getFirstPoint();
+        Point secondPoint = figure.getSecondPoint();
+        Point thirdPoint = figure.getThirdPoint();
+        Point fourthPoint = figure.getFourthPoint();
         double[] arrOfSidesLength = new double[6];
 
         arrOfSidesLength[0] = POINT_SERVICE.calcLengthBetweenTwoPoints(firstPoint, secondPoint);
@@ -49,7 +47,7 @@ public final class SquareService implements MultiAngleFiguresService {
     }
 
     @Override
-    public boolean isFigureExist(Figure figure) {
+    public boolean isFigureExist(Square figure) {
         double[] arrOfSidesLength = calcFigureSidesLength(figure);
         Arrays.sort(arrOfSidesLength);
 
@@ -58,28 +56,23 @@ public final class SquareService implements MultiAngleFiguresService {
     }
 
     @Override
-    public void displayInfoAboutArrOfFigures(Figure[] figures) {
+    public void displayInfoAboutListOfFigures(List<Square> figures) {
         System.out.println("\nLogs about array of Squares");
-        for (Figure square : figures) {
-            if (square != null && isNotCorrectFigure(square)) {
-                LOGGER.error("{} - is not square", square);
-            } else {
-                if (square != null && isFigureExist(square)) {
-                    LOGGER.info("{}\nPerimeter = {}\nArea = {}", square,
-                                                         String.format("%.2f", calcPerimeter(square)),
-                                                         String.format("%.2f", calcArea(square)));
-                }
-            }
+        for (Square square : figures) {
+            LOGGER.info("{}\nPerimeter = {}\nArea = {}", square,
+                    String.format("%.2f", calcPerimeter(square)),
+                    String.format("%.2f", calcArea(square)));
+
         }
     }
 
     @Override
-    public double calcArea(Figure figure) {
+    public double calcArea(Square figure) {
         return figure.getPolygonalFigureStrategy().calcArea(figure);
     }
 
     @Override
-    public double calcPerimeter(Figure figure) {
+    public double calcPerimeter(Square figure) {
         return figure.getPolygonalFigureStrategy().calcPerimeter(figure);
     }
 

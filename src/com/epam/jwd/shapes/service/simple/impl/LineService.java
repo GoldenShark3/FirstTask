@@ -1,11 +1,13 @@
 package com.epam.jwd.shapes.service.simple.impl;
+
 import com.epam.jwd.shapes.model.SimpleFigure;
 import com.epam.jwd.shapes.model.simple.Line;
 import com.epam.jwd.shapes.service.simple.SimpleFigureService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.util.List;
 
-public final class LineService implements SimpleFigureService {
+public final class LineService implements SimpleFigureService<Line> {
     private final Logger LOGGER = LogManager.getLogger(LineService.class);
     public final static LineService INSTANCE = new LineService();
 
@@ -18,7 +20,7 @@ public final class LineService implements SimpleFigureService {
     }
 
     @Override
-    public void displayInfoAboutArrOfFigures(SimpleFigure[] simpleFigures) {
+    public void displayInfoAboutListOfFigures(List<Line> simpleFigures) {
         System.out.println("\nLogs about array of lines: ");
         for (SimpleFigure line : simpleFigures) {
             if (isNotCorrectFigure( (Line)line)) {

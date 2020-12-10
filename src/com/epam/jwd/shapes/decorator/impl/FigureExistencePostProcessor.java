@@ -2,6 +2,7 @@ package com.epam.jwd.shapes.decorator.impl;
 
 import com.epam.jwd.shapes.exception.FigureNotExistException;
 import com.epam.jwd.shapes.model.Figure;
+import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
 import com.epam.jwd.shapes.model.polygonal.Square;
 import com.epam.jwd.shapes.model.polygonal.Triangle;
 import com.epam.jwd.shapes.decorator.api.FigurePostProcessor;
@@ -21,25 +22,27 @@ public final class FigureExistencePostProcessor implements FigurePostProcessor {
 
     @Override
     public Figure process(Figure figure) throws FigureNotExistException {
-
         if (figure instanceof Triangle) {
-            if (!(TRIANGLE_SERVICE.isFigureExist(figure))) {
-                throw new FigureNotExistException(figure + " - Figure can't exist");
+            Triangle triangle = (Triangle) figure;
+            if (!(TRIANGLE_SERVICE.isFigureExist(triangle))) {
+                throw new FigureNotExistException(triangle + " - Figure can't exist");
             } else {
                 return figure;
             }
         }
 
         if (figure instanceof Square) {
-            if (!SQUARE_SERVICE.isFigureExist(figure)) {
-                throw new FigureNotExistException(figure + " - Figure can't exist");
+            Square square = (Square) figure;
+            if (!SQUARE_SERVICE.isFigureExist(square)) {
+                throw new FigureNotExistException(square + " - Figure can't exist");
             } else {
                 return figure;
             }
         }
 
-        if (!MULTI_ANGLE_SERVICE.isFigureExist(figure)){
-            throw new FigureNotExistException(figure + " - Figure can't exist");
+        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) figure;
+        if (!MULTI_ANGLE_SERVICE.isFigureExist(multiAngleFigure)){
+            throw new FigureNotExistException(multiAngleFigure + " - Figure can't exist");
         }else {
             return figure;
         }

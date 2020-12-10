@@ -19,9 +19,7 @@ public class PostProcessingDecorator extends FigureFactoryDecorator {
     @Override
     public Figure createFigure(String figureType, Point... points) throws FigureException {
         Figure figure = figureFactory.createFigure(figureType, points);
-
         figure = SIMPLE_FACTORY_STORAGE.fetchOrAddFigure(figure);
-
         for (FigurePostProcessor postProcessor : postProcessors){
             postProcessor.process(figure);
         }

@@ -1,10 +1,11 @@
 package com.epam.jwd.shapes.model.simple;
 
 import com.epam.jwd.shapes.model.SimpleFigure;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class SimpleFigureFactory {
-    private static int index = 0;
-    private static SimpleFigure[] allCreatedSimpleFigure = new SimpleFigure[10];
+    private static final List<SimpleFigure> ALL_CREATED_SIMPLE_FIGURES = new ArrayList<>();
     private static SimpleFigureFactory instance;
 
     private SimpleFigureFactory() {
@@ -19,7 +20,7 @@ public final class SimpleFigureFactory {
     }
 
     public Point createPoint(int x, int y) {
-        for (SimpleFigure figure : allCreatedSimpleFigure) {
+        for (SimpleFigure figure : ALL_CREATED_SIMPLE_FIGURES) {
             if (figure instanceof Point) {
                 Point point = (Point) figure;
                 if (point.getX() == x && point.getY() == y) {
@@ -31,11 +32,7 @@ public final class SimpleFigureFactory {
     }
 
     public Line createLine(Point firstPoint, Point secondPoint) {
-        if (index == allCreatedSimpleFigure.length - 1) {
-            increaseCacheSize();
-        }
-
-        for (SimpleFigure figure : allCreatedSimpleFigure) {
+        for (SimpleFigure figure : ALL_CREATED_SIMPLE_FIGURES) {
             if (figure instanceof Line) {
                 Line line = (Line) figure;
                 if (line.getFirstPoint().equals(firstPoint) && line.getSecondPoint().equals(secondPoint)) {
@@ -47,31 +44,14 @@ public final class SimpleFigureFactory {
     }
 
     private Point createNewPoint(int x, int y) {
-        if (index == allCreatedSimpleFigure.length - 1) {
-            increaseCacheSize();
-        }
-
         Point point = new Point(x, y);
-        allCreatedSimpleFigure[index] = point;
-        index++;
-
+        ALL_CREATED_SIMPLE_FIGURES.add(point);
         return point;
     }
 
     private Line createNewLine(Point firstPoint, Point secondPoint) {
-        if (index == allCreatedSimpleFigure.length - 1) {
-            increaseCacheSize();
-        }
         Line line = new Line(firstPoint, secondPoint);
-        allCreatedSimpleFigure[index] = line;
-        index++;
+        ALL_CREATED_SIMPLE_FIGURES.add(line);
         return line;
-    }
-
-    private void increaseCacheSize() {
-        SimpleFigure[] tempArr = allCreatedSimpleFigure;
-        allCreatedSimpleFigure = new SimpleFigure[(int) (allCreatedSimpleFigure.length * 1.5)];
-
-        System.arraycopy(tempArr, 0, allCreatedSimpleFigure, 0, tempArr.length);
     }
 }

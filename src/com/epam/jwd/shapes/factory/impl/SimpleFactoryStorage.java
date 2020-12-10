@@ -5,10 +5,11 @@ import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
 import com.epam.jwd.shapes.model.polygonal.Square;
 import com.epam.jwd.shapes.model.polygonal.Triangle;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleFactoryStorage implements FactoryStorage {
-    private static Figure[] allCreatedFigures = new Figure[10];
-    private static int numOfFigures = 0;
+    private static final List<Figure> ALL_CREATED_FIGURES = new ArrayList<>();
     private static SimpleFactoryStorage instance;
 
     private SimpleFactoryStorage() {
@@ -23,20 +24,16 @@ public class SimpleFactoryStorage implements FactoryStorage {
 
     @Override
     public Figure fetchOrAddFigure(Figure figure) {
-        if (numOfFigures == allCreatedFigures.length - 1) {
-            increaseCacheSize();
-        }
-
         if (figure instanceof Triangle) {
-            return fetchTriangleFromCache(figure);
+            return checkTriangleInCache(figure);
         } else if (figure instanceof Square) {
-            return fetchSquareFromCache(figure);
+            return checkSquareInCache(figure);
         }
-        return fetchMultiAngleFigureFromCache(figure);
+        return checkMultiAngleFigureInCache(figure);
     }
 
-    private Figure fetchTriangleFromCache(Figure figure) {
-        for (Figure figureFromCache : allCreatedFigures) {
+    private Figure checkTriangleInCache(Figure figure) {
+        for (Figure figureFromCache : ALL_CREATED_FIGURES) {
             if (figureFromCache instanceof Triangle) {
                 Triangle triangle = (Triangle) figureFromCache;
                 if (triangle.equals(figure)) {
@@ -44,12 +41,12 @@ public class SimpleFactoryStorage implements FactoryStorage {
                 }
             }
         }
-        allCreatedFigures[numOfFigures] = figure;
+        ALL_CREATED_FIGURES.add(figure);
         return figure;
     }
 
-    private Figure fetchSquareFromCache(Figure figure) {
-        for (Figure figureFromCache : allCreatedFigures) {
+    private Figure checkSquareInCache(Figure figure) {
+        for (Figure figureFromCache : ALL_CREATED_FIGURES) {
             if (figureFromCache instanceof Square) {
                 Square square = (Square) figureFromCache;
                 if (square.equals(figure)) {
@@ -57,12 +54,12 @@ public class SimpleFactoryStorage implements FactoryStorage {
                 }
             }
         }
-        allCreatedFigures[numOfFigures++] = figure;
+        ALL_CREATED_FIGURES.add(figure);
         return figure;
     }
 
-    private Figure fetchMultiAngleFigureFromCache(Figure figure) {
-        for (Figure figureFromCache : allCreatedFigures) {
+    private Figure checkMultiAngleFigureInCache(Figure figure) {
+        for (Figure figureFromCache : ALL_CREATED_FIGURES) {
             if (figureFromCache instanceof MultiAngleFigure) {
                 MultiAngleFigure multiAngleFigure = (MultiAngleFigure) figureFromCache;
                 if (multiAngleFigure.equals(figure)) {
@@ -70,13 +67,7 @@ public class SimpleFactoryStorage implements FactoryStorage {
                 }
             }
         }
-        allCreatedFigures[numOfFigures++] = figure;
+        ALL_CREATED_FIGURES.add(figure);
         return figure;
-    }
-
-    private void increaseCacheSize() {
-        Figure[] tempArr = allCreatedFigures;
-        allCreatedFigures = new Figure[(int) (allCreatedFigures.length * 1.5)];
-        System.arraycopy(tempArr, 0, allCreatedFigures, 0, tempArr.length);
     }
 }

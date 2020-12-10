@@ -3,9 +3,7 @@ package com.epam.jwd.shapes.model.polygonal;
 import com.epam.jwd.shapes.model.Figure;
 import com.epam.jwd.shapes.model.simple.Point;
 import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
-import com.epam.jwd.shapes.strategy.impl.MultiAngleStrategy;
 import com.epam.jwd.shapes.strategy.impl.SquareStrategy;
-
 import java.util.Objects;
 
 public class Square extends Figure {
@@ -69,7 +67,4 @@ public class Square extends Figure {
         return fourthPoint;
     }
 
-    public Point[] fetchArrOfPoints() {
-        return new Point[]{firstPoint, secondPoint, thirdPoint, fourthPoint};
-    }
 }

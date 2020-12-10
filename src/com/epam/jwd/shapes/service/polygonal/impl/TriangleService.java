@@ -9,7 +9,9 @@ import com.epam.jwd.shapes.service.simple.impl.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class TriangleService implements MultiAngleFiguresService {
+import java.util.List;
+
+public final class TriangleService implements MultiAngleFiguresService<Triangle> {
     private final PointService POINT_SERVICE = PointService.getInstance();
     private final Logger LOGGER = LogManager.getLogger(TriangleService.class);
     public final static TriangleService INSTANCE = new TriangleService();
@@ -19,7 +21,7 @@ public final class TriangleService implements MultiAngleFiguresService {
     }
 
     @Override
-    public boolean isFigureExist(Figure figure) {
+    public boolean isFigureExist(Triangle figure) {
         double[] arrOfSidesLength = calcFigureSidesLength(figure);
 
         return arrOfSidesLength[0] < (arrOfSidesLength[1] + arrOfSidesLength[2])
@@ -28,53 +30,45 @@ public final class TriangleService implements MultiAngleFiguresService {
     }
 
     @Override
-    public void displayInfoAboutArrOfFigures(Figure[] figures) {
-        System.out.println("\nLogs about array of Triangles");
-        for (Figure triangle : figures) {
-            if (triangle != null && isNotCorrectFigure(triangle)) {
-                LOGGER.error("{} - is not triangle", triangle);
-            } else {
-                if (triangle != null && isFigureExist(triangle)) {
-                    LOGGER.info("{}\nPerimeter = {}\nArea = {}", triangle,
-                            String.format("%.2f", calcPerimeter(triangle)),
-                            String.format("%.2f", calcArea(triangle)));
+    public void displayInfoAboutListOfFigures(List<Triangle> figures) {
+        System.out.println("\nLogs about list of Triangles");
+        for (Triangle triangle : figures) {
+            LOGGER.info("{}\nPerimeter = {}\nArea = {}", triangle,
+                    String.format("%.2f", calcPerimeter(triangle)),
+                    String.format("%.2f", calcArea(triangle)));
 
-                }
-            }
         }
     }
 
     @Override
-    public double calcArea(Figure figure) {
+    public double calcArea(Triangle figure) {
         return figure.getPolygonalFigureStrategy().calcArea(figure);
     }
 
     @Override
-    public double calcPerimeter(Figure figure) {
+    public double calcPerimeter(Triangle figure) {
         return figure.getPolygonalFigureStrategy().calcPerimeter(figure);
     }
 
     @Override
-    public double[] calcFigureSidesLength(Figure figure) {
-        Triangle triangle = (Triangle) figure;
-        Point firstPoint = triangle.getFirstPoint();
-        Point secondPoint = triangle.getSecondPoint();
-        Point thirdPoint = triangle.getThirdPoint();
+    public double[] calcFigureSidesLength(Triangle figure) {
+        Point firstPoint = figure.getFirstPoint();
+        Point secondPoint = figure.getSecondPoint();
+        Point thirdPoint = figure.getThirdPoint();
         double[] arrOfSidesLength = new double[3];
 
         arrOfSidesLength[0] = POINT_SERVICE.calcLengthBetweenTwoPoints(firstPoint, secondPoint);
-        arrOfSidesLength[1] = POINT_SERVICE.calcLengthBetweenTwoPoints(firstPoint,thirdPoint);
+        arrOfSidesLength[1] = POINT_SERVICE.calcLengthBetweenTwoPoints(firstPoint, thirdPoint);
         arrOfSidesLength[2] = POINT_SERVICE.calcLengthBetweenTwoPoints(secondPoint, thirdPoint);
 
         return arrOfSidesLength;
     }
 
     @Override
-    public boolean isNotCorrectFigure(Figure figure) {
-        Triangle triangle = (Triangle) figure;
-        return triangle.getFirstPoint().equals(triangle.getSecondPoint())
-                || triangle.getFirstPoint().equals(triangle.getThirdPoint())
-                || triangle.getSecondPoint().equals(triangle.getThirdPoint()) ;
+    public boolean isNotCorrectFigure(Triangle figure) {
+        return figure.getFirstPoint().equals(figure.getSecondPoint())
+                || figure.getFirstPoint().equals(figure.getThirdPoint())
+                || figure.getSecondPoint().equals(figure.getThirdPoint());
     }
 
 

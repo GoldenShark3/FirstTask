@@ -60,7 +60,4 @@ public class Triangle extends Figure {
         return thirdPoint;
     }
 
-    public Point[] fetchArrOfPoints() {
-        return new Point[]{firstPoint, secondPoint, thirdPoint};
-    }
 }
