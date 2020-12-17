@@ -1,9 +1,9 @@
 package com.epam.jwd.shapes.strategy.impl;
 
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.polygonal.Triangle;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.polygonal.impl.Triangle;
 import com.epam.jwd.shapes.service.simple.impl.PointService;
-import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
+import com.epam.jwd.shapes.strategy.api.MultiAngleFigureStrategy;
 
 public class TriangleStrategy implements MultiAngleFigureStrategy {
     private static final TriangleStrategy INSTANCE = new TriangleStrategy();
@@ -17,8 +17,8 @@ public class TriangleStrategy implements MultiAngleFigureStrategy {
     }
 
     @Override
-    public double calcArea(Figure figure) {
-        Triangle triangle = (Triangle) figure;
+    public double calcArea(PolygonalFigure polygonalFigure) {
+        Triangle triangle = (Triangle) polygonalFigure;
         double firstSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getSecondPoint());
         double secondSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getThirdPoint());
         double thirdSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getSecondPoint(), triangle.getThirdPoint());
@@ -30,8 +30,8 @@ public class TriangleStrategy implements MultiAngleFigureStrategy {
     }
 
     @Override
-    public double calcPerimeter(Figure figure) {
-        Triangle triangle = (Triangle) figure;
+    public double calcPerimeter(PolygonalFigure polygonalFigure) {
+        Triangle triangle = (Triangle) polygonalFigure;
         double firstSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getSecondPoint());
         double secondSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getFirstPoint(), triangle.getThirdPoint());
         double thirdSideLength = POINT_SERVICE.calcLengthBetweenTwoPoints(triangle.getSecondPoint(), triangle.getThirdPoint());

@@ -1,17 +1,17 @@
-package com.epam.jwd.shapes.model.polygonal;
+package com.epam.jwd.shapes.model.polygonal.impl;
 
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.simple.Point;
-import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigureType;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.simple.impl.Point;
+import com.epam.jwd.shapes.strategy.api.MultiAngleFigureStrategy;
 import com.epam.jwd.shapes.strategy.impl.MultiAngleStrategy;
-
 import java.util.Arrays;
 
-public class MultiAngleFigure extends Figure {
+public class MultiAngleFigure extends PolygonalFigure {
     private final Point[] points;
 
     MultiAngleFigure(Point[] points) {
-        super(MultiAngleStrategy.INSTANCE);
+        super(MultiAngleStrategy.INSTANCE, PolygonalFigureType.MULTI_ANGLE);
         this.points = points;
     }
 

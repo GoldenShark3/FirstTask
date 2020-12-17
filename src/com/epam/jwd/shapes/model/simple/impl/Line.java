@@ -1,6 +1,6 @@
-package com.epam.jwd.shapes.model.simple;
+package com.epam.jwd.shapes.model.simple.impl;
 
-import com.epam.jwd.shapes.model.SimpleFigure;
+import com.epam.jwd.shapes.model.simple.api.SimpleFigure;
 
 public class Line extends SimpleFigure {
     private final Point firstPoint;

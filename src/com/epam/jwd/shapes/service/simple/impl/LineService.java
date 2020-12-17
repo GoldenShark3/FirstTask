@@ -1,8 +1,8 @@
 package com.epam.jwd.shapes.service.simple.impl;
 
-import com.epam.jwd.shapes.model.SimpleFigure;
-import com.epam.jwd.shapes.model.simple.Line;
-import com.epam.jwd.shapes.service.simple.SimpleFigureService;
+import com.epam.jwd.shapes.model.simple.api.SimpleFigure;
+import com.epam.jwd.shapes.model.simple.impl.Line;
+import com.epam.jwd.shapes.service.simple.api.SimpleFigureService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.List;

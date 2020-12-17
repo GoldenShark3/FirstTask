@@ -1,6 +1,6 @@
 package com.epam.jwd.shapes.service.simple.impl;
-import com.epam.jwd.shapes.model.simple.Point;
-import com.epam.jwd.shapes.service.simple.SimpleFigureService;
+import com.epam.jwd.shapes.model.simple.impl.Point;
+import com.epam.jwd.shapes.service.simple.api.SimpleFigureService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.List;
@@ -21,14 +21,6 @@ public final class PointService implements SimpleFigureService<Point> {
         return instance;
     }
 
-
-    public double calcLengthBetweenTwoPoints(Point firstPoint, Point secondPoint) {
-        int deltaX = secondPoint.getX() - firstPoint.getX();
-        int deltaY = secondPoint.getY() - firstPoint.getY();
-
-        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-    }
-
     @Override
     public void displayInfoAboutListOfFigures(List<Point> figures) {
         int index = 0;
@@ -37,5 +29,12 @@ public final class PointService implements SimpleFigureService<Point> {
             LOGGER.info("The {} point{}", (index + 1), figures.get(index));
             index++;
         } while (index < figures.size());
+    }
+
+    public double calcLengthBetweenTwoPoints(Point firstPoint, Point secondPoint) {
+        int deltaX = secondPoint.getX() - firstPoint.getX();
+        int deltaY = secondPoint.getY() - firstPoint.getY();
+
+        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     }
 }

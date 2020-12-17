@@ -1,14 +1,11 @@
 package com.epam.jwd.shapes.service.polygonal.impl;
 
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.shapes.model.simple.Point;
-import com.epam.jwd.shapes.model.polygonal.Triangle;
-import com.epam.jwd.shapes.service.polygonal.MultiAngleFiguresService;
+import com.epam.jwd.shapes.model.simple.impl.Point;
+import com.epam.jwd.shapes.model.polygonal.impl.Triangle;
+import com.epam.jwd.shapes.service.polygonal.api.MultiAngleFiguresService;
 import com.epam.jwd.shapes.service.simple.impl.PointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 
 public final class TriangleService implements MultiAngleFiguresService<Triangle> {

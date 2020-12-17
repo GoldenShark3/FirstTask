@@ -1,9 +1,9 @@
 package com.epam.jwd.shapes.factory.api;
 
 import com.epam.jwd.shapes.exception.FigureException;
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.simple.Point;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.simple.impl.Point;
 
 public interface FigureFactory {
-    Figure createFigure(String figureType, Point... points) throws FigureException;
+    PolygonalFigure createFigure(String figureType, Point... points) throws FigureException;
 }

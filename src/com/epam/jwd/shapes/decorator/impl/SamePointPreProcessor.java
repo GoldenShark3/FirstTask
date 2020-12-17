@@ -1,7 +1,7 @@
 package com.epam.jwd.shapes.decorator.impl;
 
 import com.epam.jwd.shapes.exception.FigureNotExistException;
-import com.epam.jwd.shapes.model.simple.Point;
+import com.epam.jwd.shapes.model.simple.impl.Point;
 import com.epam.jwd.shapes.decorator.api.FigurePreProcessor;
 import java.util.Arrays;
 

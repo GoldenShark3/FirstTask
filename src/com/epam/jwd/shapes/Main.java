@@ -3,14 +3,12 @@ package com.epam.jwd.shapes;
 import com.epam.jwd.shapes.factory.impl.SimpleApplicationContext;
 import com.epam.jwd.shapes.exception.FigureException;
 import com.epam.jwd.shapes.factory.api.FigureFactory;
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.SimpleFigure;
-import com.epam.jwd.shapes.model.simple.Line;
-import com.epam.jwd.shapes.model.simple.Point;
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.shapes.model.polygonal.Square;
-import com.epam.jwd.shapes.model.polygonal.Triangle;
-import com.epam.jwd.shapes.model.simple.SimpleFigureFactory;
+import com.epam.jwd.shapes.model.simple.impl.Line;
+import com.epam.jwd.shapes.model.simple.impl.Point;
+import com.epam.jwd.shapes.model.polygonal.impl.MultiAngleFigure;
+import com.epam.jwd.shapes.model.polygonal.impl.Square;
+import com.epam.jwd.shapes.model.polygonal.impl.Triangle;
+import com.epam.jwd.shapes.model.simple.impl.SimpleFigureFactory;
 import com.epam.jwd.shapes.service.simple.impl.LineService;
 import com.epam.jwd.shapes.service.simple.impl.PointService;
 import com.epam.jwd.shapes.service.polygonal.impl.MultiAngleService;
@@ -18,7 +16,6 @@ import com.epam.jwd.shapes.service.polygonal.impl.SquareService;
 import com.epam.jwd.shapes.service.polygonal.impl.TriangleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +42,6 @@ public class Main {
         POINT_LIST.add(SIMPLE_FIGURE_FACTORY.createPoint(-5, 5));
         POINT_LIST.add(SIMPLE_FIGURE_FACTORY.createPoint(0, 5));
         POINT_LIST.add(SIMPLE_FIGURE_FACTORY.createPoint(0, 0));
-
     }
 
     private static void initArrOfLines() {
@@ -78,6 +74,7 @@ public class Main {
                 POINT_LIST.get(1),
                 POINT_LIST.get(2),
                 POINT_LIST.get(3)));
+
         SQUARE_LIST.add((Square) MULTI_ANGLE_FIGURE_FACTORY.createFigure("square",
                 SIMPLE_FIGURE_FACTORY.createPoint(0, 0),
                 SIMPLE_FIGURE_FACTORY.createPoint(4, 5),
@@ -107,20 +104,23 @@ public class Main {
     public static void main(String[] args) {
         initArrOfPoints();
         initArrOfLines();
+
         try {
             initArrOfTriangles();
         } catch (FigureException exception) {
-            LOGGER.error(exception.getLocalizedMessage());
+            LOGGER.error(exception.getMessage());
         }
+
         try {
             initArrOfSquares();
         } catch (FigureException exception) {
-            LOGGER.error(exception.getLocalizedMessage());
+            LOGGER.error(exception.getMessage());
         }
+
         try {
             initArrOfMultiAngleFigures();
         } catch (FigureException exception) {
-            LOGGER.error(exception.getLocalizedMessage());
+            LOGGER.error(exception.getMessage());
         }
 
         POINT_SERVICE.displayInfoAboutListOfFigures(POINT_LIST);

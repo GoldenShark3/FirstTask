@@ -4,25 +4,25 @@ import com.epam.jwd.shapes.decorator.api.FigureFactoryDecorator;
 import com.epam.jwd.shapes.decorator.api.FigurePostProcessor;
 import com.epam.jwd.shapes.exception.FigureException;
 import com.epam.jwd.shapes.factory.api.FigureFactory;
-import com.epam.jwd.shapes.factory.impl.SimpleFactoryStorage;
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.simple.Point;
+import com.epam.jwd.shapes.storage.impl.FigureCrudImpl;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.simple.impl.Point;
 
 public class PostProcessingDecorator extends FigureFactoryDecorator {
     private final FigurePostProcessor[] postProcessors = new FigurePostProcessor[]{FigureExistencePostProcessor.INSTANCE};
-    private final static SimpleFactoryStorage SIMPLE_FACTORY_STORAGE = SimpleFactoryStorage.getInstance();
+    private final static FigureCrudImpl FIGURE_CRUD = FigureCrudImpl.getInstance();
 
     public PostProcessingDecorator(FigureFactory figureFactory) {
         super(figureFactory);
     }
 
     @Override
-    public Figure createFigure(String figureType, Point... points) throws FigureException {
-        Figure figure = figureFactory.createFigure(figureType, points);
-        figure = SIMPLE_FACTORY_STORAGE.fetchOrAddFigure(figure);
+    public PolygonalFigure createFigure(String figureType, Point... points) throws FigureException {
+        PolygonalFigure polygonalFigure = figureFactory.createFigure(figureType, points);
         for (FigurePostProcessor postProcessor : postProcessors){
-            postProcessor.process(figure);
+            postProcessor.process(polygonalFigure);
         }
-        return figure;
+        polygonalFigure = FIGURE_CRUD.fetchFigureFromStorage(polygonalFigure);
+        return polygonalFigure;
     }
 }

@@ -1,31 +1,31 @@
 package com.epam.jwd.shapes.strategy.impl;
 
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.polygonal.impl.MultiAngleFigure;
 import com.epam.jwd.shapes.service.simple.impl.PointService;
-import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
+import com.epam.jwd.shapes.strategy.api.MultiAngleFigureStrategy;
 
 public enum MultiAngleStrategy implements MultiAngleFigureStrategy {
     INSTANCE;
 
     @Override
-    public double calcArea(Figure figure) {
-        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) figure;
-        double[] figureSidesLength = calcSidesLength(figure);
+    public double calcArea(PolygonalFigure polygonalFigure) {
+        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) polygonalFigure;
+        double[] figureSidesLength = calcSidesLength(polygonalFigure);
         double numOfFigurePoints = multiAngleFigure.getPoints().length;
 
         return (Math.pow(figureSidesLength[0], 2) * numOfFigurePoints) / (4 * Math.tan(Math.PI / numOfFigurePoints));
     }
 
     @Override
-    public double calcPerimeter(Figure figure) {
-        double[] figuresSidesLength = calcSidesLength(figure);
+    public double calcPerimeter(PolygonalFigure polygonalFigure) {
+        double[] figuresSidesLength = calcSidesLength(polygonalFigure);
 
         return figuresSidesLength[0] * figuresSidesLength.length;
     }
 
-    private double[] calcSidesLength(Figure figure) {
-        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) figure;
+    private double[] calcSidesLength(PolygonalFigure polygonalFigure) {
+        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) polygonalFigure;
         final PointService POINT_SERVICE = PointService.getInstance();
         double[] figureSidesLength = new double[multiAngleFigure.getPoints().length];
 

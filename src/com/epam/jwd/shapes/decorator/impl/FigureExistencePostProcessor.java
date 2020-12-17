@@ -1,10 +1,11 @@
 package com.epam.jwd.shapes.decorator.impl;
 
 import com.epam.jwd.shapes.exception.FigureNotExistException;
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.polygonal.MultiAngleFigure;
-import com.epam.jwd.shapes.model.polygonal.Square;
-import com.epam.jwd.shapes.model.polygonal.Triangle;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigureType;
+import com.epam.jwd.shapes.model.polygonal.impl.MultiAngleFigure;
+import com.epam.jwd.shapes.model.polygonal.impl.Square;
+import com.epam.jwd.shapes.model.polygonal.impl.Triangle;
 import com.epam.jwd.shapes.decorator.api.FigurePostProcessor;
 import com.epam.jwd.shapes.service.polygonal.impl.MultiAngleService;
 import com.epam.jwd.shapes.service.polygonal.impl.SquareService;
@@ -21,30 +22,30 @@ public final class FigureExistencePostProcessor implements FigurePostProcessor {
     }
 
     @Override
-    public Figure process(Figure figure) throws FigureNotExistException {
-        if (figure instanceof Triangle) {
-            Triangle triangle = (Triangle) figure;
+    public PolygonalFigure process(PolygonalFigure polygonalFigure) throws FigureNotExistException {
+        if (polygonalFigure.getFigureType() == PolygonalFigureType.TRIANGLE) {
+            Triangle triangle = (Triangle) polygonalFigure;
             if (!(TRIANGLE_SERVICE.isFigureExist(triangle))) {
                 throw new FigureNotExistException(triangle + " - Figure can't exist");
             } else {
-                return figure;
+                return polygonalFigure;
             }
         }
 
-        if (figure instanceof Square) {
-            Square square = (Square) figure;
+        if (polygonalFigure.getFigureType() == PolygonalFigureType.SQUARE) {
+            Square square = (Square) polygonalFigure;
             if (!SQUARE_SERVICE.isFigureExist(square)) {
                 throw new FigureNotExistException(square + " - Figure can't exist");
             } else {
-                return figure;
+                return polygonalFigure;
             }
         }
 
-        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) figure;
+        MultiAngleFigure multiAngleFigure = (MultiAngleFigure) polygonalFigure;
         if (!MULTI_ANGLE_SERVICE.isFigureExist(multiAngleFigure)){
             throw new FigureNotExistException(multiAngleFigure + " - Figure can't exist");
         }else {
-            return figure;
+            return polygonalFigure;
         }
     }
 }

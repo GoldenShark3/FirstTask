@@ -1,23 +1,24 @@
-package com.epam.jwd.shapes.model.polygonal;
+package com.epam.jwd.shapes.model.polygonal.impl;
 
-import com.epam.jwd.shapes.model.Figure;
-import com.epam.jwd.shapes.model.simple.Point;
-import com.epam.jwd.shapes.strategy.MultiAngleFigureStrategy;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigureType;
+import com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure;
+import com.epam.jwd.shapes.model.simple.impl.Point;
+import com.epam.jwd.shapes.strategy.api.MultiAngleFigureStrategy;
 import com.epam.jwd.shapes.strategy.impl.SquareStrategy;
 import java.util.Objects;
 
-public class Square extends Figure {
+public class Square extends PolygonalFigure {
     private final Point firstPoint;
     private final Point secondPoint;
     private final Point thirdPoint;
     private final Point fourthPoint;
 
-    Square(Point firstPoint, Point secondPoint, Point thirdPoint, Point fourthPoint) {
-        super(SquareStrategy.getInstance());
-        this.firstPoint = firstPoint;
-        this.secondPoint = secondPoint;
-        this.thirdPoint = thirdPoint;
-        this.fourthPoint = fourthPoint;
+    Square(Point... points) {
+        super(SquareStrategy.getInstance(), PolygonalFigureType.SQUARE);
+        this.firstPoint = points[0];
+        this.secondPoint = points[1];
+        this.thirdPoint = points[2];
+        this.fourthPoint = points[3];
     }
 
     @Override
