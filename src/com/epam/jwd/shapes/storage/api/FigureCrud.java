@@ -6,8 +6,8 @@ import com.epam.jwd.shapes.model.simple.impl.Point;
 import java.util.List;
 
 public interface FigureCrud {
-    void createFigure(String figureType, Point... points) throws FigureException;
-    void multiCreateFigure(List<? extends PolygonalFigure> listOfFigures);
+    PolygonalFigure createFigure(String figureType, Point... points) throws FigureException;
+    void multiCreateFigure(String figureType, List<Point[]> listOfPoints) throws FigureException;
     void deleteFigure(int figureId);
     List<PolygonalFigure> findFiguresByType(String figureType);
     void updateFigure(int index, PolygonalFigure figure);

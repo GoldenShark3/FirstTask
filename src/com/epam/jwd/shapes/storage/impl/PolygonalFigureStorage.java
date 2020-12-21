@@ -7,19 +7,18 @@ import com.epam.jwd.shapes.model.polygonal.impl.MultiAngleFigure;
 import com.epam.jwd.shapes.model.polygonal.impl.Square;
 import com.epam.jwd.shapes.model.polygonal.impl.Triangle;
 import com.epam.jwd.shapes.storage.api.FigureStorage;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PolygonalFigureStorage implements FigureStorage<PolygonalFigure> {
-    private static final List<com.epam.jwd.shapes.model.polygonal.api.PolygonalFigure> ALL_CREATED_FIGURES = new ArrayList<>();
+class PolygonalFigureStorage implements FigureStorage<PolygonalFigure> {
+    private static final List<PolygonalFigure> ALL_CREATED_FIGURES = new ArrayList<>();
     private static PolygonalFigureStorage instance;
 
     private PolygonalFigureStorage() {
     }
 
-    static PolygonalFigureStorage getInstance() {
+    public static PolygonalFigureStorage getInstance() {
         if (instance == null) {
             instance = new PolygonalFigureStorage();
         }
@@ -28,23 +27,19 @@ public class PolygonalFigureStorage implements FigureStorage<PolygonalFigure> {
 
     @Override
     public PolygonalFigure fetchOrAddFigure(PolygonalFigure polygonalFigure) {
-        if (polygonalFigure.getFigureType() == PolygonalFigureType.TRIANGLE) {
-            return checkTriangleInCache(polygonalFigure);
-        } else if (polygonalFigure.getFigureType() == PolygonalFigureType.SQUARE) {
-            return checkSquareInCache(polygonalFigure);
-        }
-        return checkMultiAngleFigureInCache(polygonalFigure);
-    }
-
-    void addListOfFigure(List<? extends PolygonalFigure> listOfFigure) {
-        for (PolygonalFigure figure : listOfFigure) {
-            if (!ALL_CREATED_FIGURES.contains(figure)) {
-                ALL_CREATED_FIGURES.add(figure);
-            }
+        switch(polygonalFigure.getFigureType()) {
+            case TRIANGLE:
+                return checkTriangleInCache(polygonalFigure);
+            case SQUARE:
+                return checkSquareInCache(polygonalFigure);
+            case MULTI_ANGLE:
+                return checkMultiAngleFigureInCache(polygonalFigure);
+            default:
+                throw new IllegalArgumentException(polygonalFigure.getFigureType() + "this type does not exist");
         }
     }
 
-    void removeFigure(int figureId) {
+    public void removeFigure(int figureId) {
         PolygonalFigure figure = ALL_CREATED_FIGURES.stream()
                 .filter((figureFromStorage) -> figureFromStorage.getID() == figureId)
                 .findFirst()
@@ -53,23 +48,23 @@ public class PolygonalFigureStorage implements FigureStorage<PolygonalFigure> {
         ALL_CREATED_FIGURES.remove(figure);
     }
 
-    List<PolygonalFigure> findFigures(int figureId) {
+    public List<PolygonalFigure> findFigures(int figureId) {
         return ALL_CREATED_FIGURES.stream()
                 .filter((figureFromStorage) -> figureFromStorage.getID() == figureId)
                 .collect(Collectors.toList());
     }
 
-    void updateFigure(int index, PolygonalFigure figure) {
+    public void updateFigure(int index, PolygonalFigure figure) {
         ALL_CREATED_FIGURES.set(index, figure);
     }
 
-    List<PolygonalFigure> fetchFiguresFromCache(PolygonalFigureType figureType) {
+    public List<PolygonalFigure> fetchFiguresFromCache(PolygonalFigureType figureType) {
         return ALL_CREATED_FIGURES.stream()
                 .filter((figureFromCache) -> figureFromCache.getFigureType().equals(figureType))
                 .collect(Collectors.toList());
     }
 
-    List<? extends PolygonalFigure> figuresByCriteria(PolygonalFigureCriteria figureCriteria) {
+    public List<? extends PolygonalFigure> figuresByCriteria(PolygonalFigureCriteria figureCriteria) {
         return ALL_CREATED_FIGURES.stream()
                 .filter(figure -> figureCriteria.getFigureType() == null
                         || figureCriteria.getFigureType() == figure.getFigureType())
